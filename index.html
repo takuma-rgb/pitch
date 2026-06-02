@@ -28,7 +28,7 @@ body {
   position:fixed; inset:0;
   display:none; flex-direction:column;
   justify-content:center;
-  padding:0 112px;
+  padding:0 88px;
   background:var(--black);
 }
 .slide.active { display:flex; }
@@ -40,20 +40,20 @@ body {
 
 /* ── type ── */
 .eyebrow {
-  font-size:11px; font-weight:700;
+  font-size:17px; font-weight:700;
   letter-spacing:.22em; text-transform:uppercase;
   color:var(--red); margin-bottom:28px;
   font-family:'SF Mono',monospace;
 }
 h1 {
-  font-size:clamp(38px,5.2vw,70px);
+  font-size:clamp(42px,5.55vw,76px);
   font-weight:900; line-height:1.13;
   letter-spacing:-.025em; color:var(--white);
 }
 h1 .r { color:var(--red); }
 h1 .d { color:var(--pale); }
 .body-text {
-  font-size:clamp(15px,1.7vw,22px);
+  font-size:clamp(19px,2.05vw,28px);
   color:var(--pale); line-height:1.85;
   margin-top:26px; max-width:820px;
 }
@@ -72,17 +72,17 @@ h1 .d { color:var(--pale); }
 .kpi-row { display:flex; gap:18px; margin-top:36px; }
 .kpi { flex:1; }
 .kpi .val {
-  font-size:clamp(17px,2vw,26px);
+  font-size:clamp(21px,2.35vw,32px);
   font-weight:900; color:var(--white);
   font-family:'SF Mono',monospace; line-height:1.2;
 }
-.kpi .cap { font-size:13px; color:var(--pale); margin-top:8px; line-height:1.55; }
+.kpi .cap { font-size:19px; color:var(--pale); margin-top:8px; line-height:1.55; }
 
 /* ── bullet ── */
 .blist { list-style:none; margin-top:32px; display:flex; flex-direction:column; gap:16px; }
 .blist li {
   display:flex; align-items:flex-start;
-  gap:14px; font-size:clamp(14px,1.65vw,21px);
+  gap:14px; font-size:clamp(18px,2.00vw,27px);
   color:var(--pale); line-height:1.55;
 }
 .blist li::before {
@@ -95,31 +95,32 @@ h1 .d { color:var(--pale); }
 /* ── mkt grid ── */
 .mkt-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; margin-top:28px; }
 .mkt-card { background:var(--card); border:1px solid var(--border); border-radius:6px; padding:18px 16px; }
-.mkt-card .mv { font-size:clamp(17px,1.9vw,24px); font-weight:900; color:var(--red); font-family:'SF Mono',monospace; line-height:1.1; }
-.mkt-card .mc { font-size:12px; color:var(--pale); margin-top:6px; line-height:1.5; }
+.mkt-card .mv { font-size:clamp(21px,2.25vw,30px); font-weight:900; color:var(--red); font-family:'SF Mono',monospace; line-height:1.1; }
+.mkt-card .mc { font-size:18px; color:var(--pale); margin-top:6px; line-height:1.5; }
 
 /* ── trac grid ── */
 .trac-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:32px; }
 .trac-card { background:var(--card); border:1px solid var(--border); border-radius:6px; padding:22px 20px; }
-.trac-card .tv { font-size:clamp(22px,2.6vw,38px); font-weight:900; font-family:'SF Mono',monospace; color:var(--white); line-height:1; }
+.trac-card .tv { font-size:clamp(26px,2.95vw,44px); font-weight:900; font-family:'SF Mono',monospace; color:var(--white); line-height:1; }
 .trac-card .tv.r { color:var(--red); }
-.trac-card .tc { font-size:13px; color:var(--pale); margin-top:8px; line-height:1.5; }
+.trac-card .tc { font-size:19px; color:var(--pale); margin-top:8px; line-height:1.5; }
 
 /* ── bar chart ── */
 .bar-row { display:flex; align-items:flex-end; gap:32px; height:140px; }
 .bg { display:flex; flex-direction:column; align-items:center; gap:6px; }
-.bv { font-size:clamp(13px,1.5vw,18px); font-weight:800; font-family:monospace; color:var(--pale); }
-.bv.r { color:var(--red); font-size:clamp(15px,1.8vw,22px); }
+.bv { font-size:clamp(17px,1.85vw,24px); font-weight:800; font-family:monospace; color:var(--pale); }
+.bv.r { color:var(--red); font-size:clamp(19px,2.15vw,28px); }
 .br { width:60px; border-radius:3px 3px 0 0; background:#252525; }
 .br.r { background:var(--red); }
-.by { font-size:12px; color:var(--muted); font-weight:600; margin-top:3px; }
+.by { font-size:18px; color:var(--muted); font-weight:600; margin-top:3px; }
 
 /* ── progress / nav ── */
 #progress { position:fixed; top:0; left:0; height:3px; background:var(--red); transition:width .3s; z-index:200; }
 #nav {
+  display:none;
   position:fixed; bottom:24px; left:50%;
   transform:translateX(-50%);
-  display:flex; align-items:center; gap:12px;
+  display:none; align-items:center; gap:12px;
   background:rgba(8,8,8,.95); border:1px solid #2a2a2a;
   border-radius:100px; padding:9px 20px;
   backdrop-filter:blur(16px); z-index:100;
@@ -127,16 +128,16 @@ h1 .d { color:var(--pale); }
 #nav button { background:none; border:none; color:var(--pale); font-size:20px; cursor:pointer; padding:2px 6px; transition:color .15s; line-height:1; }
 #nav button:hover { color:var(--white); }
 #nav button:disabled { opacity:.2; cursor:default; }
-#counter { font-size:11px; color:var(--muted); font-family:monospace; min-width:40px; text-align:center; }
+#counter { font-size:17px; color:var(--muted); font-family:monospace; min-width:40px; text-align:center; }
 .dots { display:flex; gap:6px; align-items:center; }
 .dot { width:5px; height:5px; border-radius:50%; background:#333; cursor:pointer; transition:all .15s; }
 .dot.active { background:var(--red); transform:scale(1.3); }
-.snum { position:absolute; bottom:28px; right:40px; font-size:11px; color:var(--muted); font-family:monospace; }
+.snum { position:absolute; bottom:28px; right:40px; font-size:17px; color:var(--muted); font-family:monospace; }
 
 /* ── profile helpers ── */
 .pk { color:var(--red); font-weight:700; margin-right:6px; }
-.tl-year { font-size:13px; font-weight:700; color:var(--red); font-family:monospace; min-width:36px; flex-shrink:0; }
-.tl-desc { font-size:14px; color:var(--pale); line-height:1.5; }
+.tl-year { font-size:19px; font-weight:700; color:var(--red); font-family:monospace; min-width:36px; flex-shrink:0; }
+.tl-desc { font-size:17px; color:var(--pale); line-height:1.5; }
 .tl-desc.accent { color:var(--white); font-weight:700; }
 
 /* ── divider ── */
@@ -150,20 +151,20 @@ h1 .d { color:var(--pale); }
 <div class="slide active">
 
   <!-- top label -->
-  <div style="font-size:11px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-bottom:36px;font-family:monospace;">
+  <div style="font-size:17px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-bottom:36px;font-family:monospace;">
     <span style="color:var(--red);margin-right:10px;">●</span>EO東京 歴代会長・アドバイザリーボード向け
   </div>
 
   <!-- BHAG label -->
-  <div style="font-size:12px;font-weight:700;letter-spacing:.2em;color:var(--red);font-family:monospace;margin-bottom:14px;">BHAG</div>
+  <div style="font-size:18px;font-weight:700;letter-spacing:.2em;color:var(--red);font-family:monospace;margin-bottom:14px;">BHAG</div>
 
   <!-- main headline: single line -->
-  <div style="font-size:clamp(38px,5vw,72px);font-weight:900;line-height:1.1;letter-spacing:-.03em;white-space:nowrap;margin-bottom:10px;">
+  <div style="font-size:clamp(42px,5.35vw,78px);font-weight:900;line-height:1.1;letter-spacing:-.03em;white-space:nowrap;margin-bottom:10px;">
     10年後<span style="color:var(--red);">1,000億</span>の挑戦。
   </div>
 
   <!-- sub headline -->
-  <div style="font-size:clamp(16px,1.8vw,24px);font-weight:700;color:var(--pale);margin-bottom:36px;letter-spacing:.02em;">
+  <div style="font-size:clamp(20px,2.15vw,30px);font-weight:700;color:var(--pale);margin-bottom:36px;letter-spacing:.02em;">
     女性キャリア支援 × 地方創生
   </div>
 
@@ -172,15 +173,15 @@ h1 .d { color:var(--pale); }
 
   <!-- presenter info -->
   <div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 20px;">
-    <span style="font-size:clamp(20px,2.4vw,32px);font-weight:900;">松村 拓馬</span>
-    <span style="font-size:15px;color:var(--pale);">くまちゃん</span>
-    <span style="font-size:15px;color:var(--muted);">·</span>
-    <span style="font-size:15px;color:var(--pale);">31期 ビジネスラーニング理事</span>
-    <span style="font-size:15px;color:var(--muted);">·</span>
-    <span style="font-size:15px;color:var(--pale);">JOKER'S株式会社 / Licore株式会社</span>
+    <span style="font-size:clamp(24px,2.75vw,38px);font-weight:900;">松村 拓馬</span>
+    <span style="font-size:18px;color:var(--pale);">くまちゃん</span>
+    <span style="font-size:18px;color:var(--muted);">·</span>
+    <span style="font-size:18px;color:var(--pale);">31期 ビジネスラーニング理事</span>
+    <span style="font-size:18px;color:var(--muted);">·</span>
+    <span style="font-size:18px;color:var(--pale);">JOKER'S株式会社 / Licore株式会社</span>
   </div>
 
-  <div class="snum">01 / 10</div>
+  <div class="snum">01 / 11</div>
 </div>
 
 <!-- ══ 02 PROFILE ══ -->
@@ -190,8 +191,8 @@ h1 .d { color:var(--pale); }
 
     <!-- left -->
     <div>
-      <div style="font-size:12px;color:var(--muted);letter-spacing:.1em;font-family:monospace;margin-bottom:6px;">まつむら　たくま</div>
-      <div style="font-size:clamp(40px,5vw,64px);font-weight:900;letter-spacing:-.02em;line-height:1;margin-bottom:26px;">松村 拓馬</div>
+      <div style="font-size:18px;color:var(--muted);letter-spacing:.1em;font-family:monospace;margin-bottom:6px;">まつむら　たくま</div>
+      <div style="font-size:clamp(44px,5.35vw,70px);font-weight:900;letter-spacing:-.02em;line-height:1;margin-bottom:26px;">松村 拓馬</div>
       <div style="display:flex;flex-direction:column;gap:12px;">
         <div style="font-size:17px;color:var(--white);"><span class="pk">生年月日</span>1995年2月14日（満31歳）</div>
         <div style="font-size:17px;color:var(--white);"><span class="pk">出身地</span>石川県金沢市</div>
@@ -205,13 +206,13 @@ h1 .d { color:var(--pale); }
 
     <!-- right: career -->
     <div>
-      <div style="font-size:11px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-family:monospace;margin-bottom:22px;">Career</div>
+      <div style="font-size:17px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-family:monospace;margin-bottom:22px;">Career</div>
       <div style="display:flex;flex-direction:column;gap:16px;">
-        <div style="display:flex;gap:18px;align-items:baseline;"><span class="tl-year" style="font-size:15px;">2017</span><span style="font-size:17px;color:var(--white);line-height:1.5;">東京学芸大学教養学部卒業 → 個人事業主</span></div>
-        <div style="display:flex;gap:18px;align-items:baseline;"><span class="tl-year" style="font-size:15px;">2018</span><span style="font-size:17px;color:var(--white);line-height:1.5;">合同会社Esforco（エスフォルソ）設立</span></div>
-        <div style="display:flex;gap:18px;align-items:baseline;"><span class="tl-year" style="font-size:15px;">2019</span><span style="font-size:17px;color:var(--white);line-height:1.5;">Esforco 事業譲渡 → AnyMind Japan 入社</span></div>
-        <div style="display:flex;gap:18px;align-items:baseline;"><span class="tl-year" style="font-size:15px;">2020</span><span style="font-size:17px;color:var(--white);font-weight:900;line-height:1.5;">JOKER'S株式会社 設立</span></div>
-        <div style="display:flex;gap:18px;align-items:baseline;"><span class="tl-year" style="font-size:15px;">2023</span><span style="font-size:17px;color:var(--white);font-weight:900;line-height:1.5;">Licore株式会社 設立</span></div>
+        <div style="display:flex;gap:18px;align-items:baseline;"><span class="tl-year" style="font-size:18px;">2017</span><span style="font-size:17px;color:var(--white);line-height:1.5;">東京学芸大学教養学部卒業 → 個人事業主</span></div>
+        <div style="display:flex;gap:18px;align-items:baseline;"><span class="tl-year" style="font-size:18px;">2018</span><span style="font-size:17px;color:var(--white);line-height:1.5;">合同会社Esforco（エスフォルソ）設立</span></div>
+        <div style="display:flex;gap:18px;align-items:baseline;"><span class="tl-year" style="font-size:18px;">2019</span><span style="font-size:17px;color:var(--white);line-height:1.5;">Esforco 事業譲渡 → AnyMind Japan 入社</span></div>
+        <div style="display:flex;gap:18px;align-items:baseline;"><span class="tl-year" style="font-size:18px;">2020</span><span style="font-size:17px;color:var(--white);font-weight:900;line-height:1.5;">JOKER'S株式会社 設立</span></div>
+        <div style="display:flex;gap:18px;align-items:baseline;"><span class="tl-year" style="font-size:18px;">2023</span><span style="font-size:17px;color:var(--white);font-weight:900;line-height:1.5;">Licore株式会社 設立</span></div>
       </div>
     </div>
 
@@ -224,28 +225,28 @@ h1 .d { color:var(--pale); }
   <div class="eyebrow">Business — 事業内容 &amp; 会社概要</div>
 
   <!-- headline -->
-  <div style="font-size:clamp(18px,2.2vw,30px);font-weight:900;line-height:1.35;letter-spacing:-.02em;margin-bottom:14px;">
+  <div style="font-size:clamp(22px,2.55vw,36px);font-weight:900;line-height:1.35;letter-spacing:-.02em;margin-bottom:14px;">
     SNS・LIVE・TikTok Shopを<br><span style="color:var(--red);">1社で完結できる会社は、ほぼない。</span><br>
-    <span style="font-size:clamp(13px,1.4vw,18px);font-weight:600;color:var(--pale);">実績をもって、業界の<span style="color:var(--white);font-weight:800;">第一想起</span>を取りに行く。</span>
+    <span style="font-size:clamp(17px,1.75vw,24px);font-weight:600;color:var(--pale);">実績をもって、業界の<span style="color:var(--white);font-weight:800;">第一想起</span>を取りに行く。</span>
   </div>
 
   <!-- revenue targets -->
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
     <div style="background:#111;border:1px solid #2a2a2a;border-radius:6px;padding:10px 14px;">
-      <div style="font-size:10px;color:var(--muted);font-family:monospace;white-space:nowrap;margin-bottom:4px;">今期 着地</div>
-      <div style="font-size:clamp(18px,2vw,26px);font-weight:900;color:var(--pale);font-family:monospace;white-space:nowrap;">5億円</div>
+      <div style="font-size:19px;color:var(--muted);font-family:monospace;white-space:nowrap;margin-bottom:4px;">今期 着地</div>
+      <div style="font-size:clamp(22px,2.35vw,32px);font-weight:900;color:var(--pale);font-family:monospace;white-space:nowrap;">5億円</div>
     </div>
     <div style="background:#111;border:1px solid #2a2a2a;border-radius:6px;padding:10px 14px;">
-      <div style="font-size:10px;color:var(--muted);font-family:monospace;white-space:nowrap;margin-bottom:4px;">3年後 目標</div>
-      <div style="font-size:clamp(18px,2vw,26px);font-weight:900;color:var(--white);font-family:monospace;white-space:nowrap;">50億円</div>
+      <div style="font-size:19px;color:var(--muted);font-family:monospace;white-space:nowrap;margin-bottom:4px;">3年後 目標</div>
+      <div style="font-size:clamp(22px,2.35vw,32px);font-weight:900;color:var(--white);font-family:monospace;white-space:nowrap;">50億円</div>
     </div>
     <div style="background:#110000;border:1px solid var(--red);border-radius:6px;padding:10px 14px;">
-      <div style="font-size:10px;color:var(--red);font-family:monospace;white-space:nowrap;margin-bottom:4px;">5年後 目標</div>
-      <div style="font-size:clamp(18px,2vw,26px);font-weight:900;color:var(--red);font-family:monospace;white-space:nowrap;">100億円</div>
+      <div style="font-size:19px;color:var(--red);font-family:monospace;white-space:nowrap;margin-bottom:4px;">5年後 目標</div>
+      <div style="font-size:clamp(22px,2.35vw,32px);font-weight:900;color:var(--red);font-family:monospace;white-space:nowrap;">100億円</div>
     </div>
     <div style="background:#110000;border:1px solid var(--red);border-radius:6px;padding:10px 14px;">
-      <div style="font-size:10px;color:var(--red);font-family:monospace;white-space:nowrap;margin-bottom:4px;">10年後 目標</div>
-      <div style="font-size:clamp(18px,2vw,26px);font-weight:900;color:var(--red);font-family:monospace;white-space:nowrap;">1,000億円</div>
+      <div style="font-size:19px;color:var(--red);font-family:monospace;white-space:nowrap;margin-bottom:4px;">10年後 目標</div>
+      <div style="font-size:clamp(22px,2.35vw,32px);font-weight:900;color:var(--red);font-family:monospace;white-space:nowrap;">1,000億円</div>
     </div>
   </div>
 
@@ -254,43 +255,43 @@ h1 .d { color:var(--pale); }
 
     <div class="card" style="padding:22px 24px;">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-        <span style="font-size:clamp(16px,1.8vw,22px);font-weight:900;color:var(--white);white-space:nowrap;">JOKER'S株式会社</span>
-        <span style="font-size:10px;background:var(--red);color:#fff;font-weight:700;padding:2px 8px;border-radius:3px;font-family:monospace;flex-shrink:0;">BtoB</span>
+        <span style="font-size:clamp(20px,2.15vw,28px);font-weight:900;color:var(--white);white-space:nowrap;">JOKER'S株式会社</span>
+        <span style="font-size:19px;background:var(--red);color:#fff;font-weight:700;padding:2px 8px;border-radius:3px;font-family:monospace;flex-shrink:0;">BtoB</span>
       </div>
-      <div style="font-size:11px;color:var(--muted);font-family:monospace;margin-bottom:14px;">2020年設立</div>
+      <div style="font-size:17px;color:var(--muted);font-family:monospace;margin-bottom:14px;">2020年設立</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
-        <div style="display:flex;gap:10px;font-size:15px;color:var(--white);line-height:1.5;"><span style="color:var(--red);flex-shrink:0;">▸</span><span>販促施策・SNSマーケティング事業</span></div>
-        <div style="display:flex;gap:10px;font-size:15px;color:var(--white);line-height:1.5;"><span style="color:var(--red);flex-shrink:0;">▸</span><span>TikTok Shop 運営・支援</span></div>
-        <div style="display:flex;gap:10px;font-size:15px;color:var(--white);line-height:1.5;"><span style="color:var(--red);flex-shrink:0;">▸</span><span>SNS分析 &amp; 企業案件サポート（クリエイター向け）</span></div>
+        <div style="display:flex;gap:10px;font-size:18px;color:var(--white);line-height:1.5;"><span style="color:var(--red);flex-shrink:0;">▸</span><span>販促施策・SNSマーケティング事業</span></div>
+        <div style="display:flex;gap:10px;font-size:18px;color:var(--white);line-height:1.5;"><span style="color:var(--red);flex-shrink:0;">▸</span><span>TikTok Shop 運営・支援</span></div>
+        <div style="display:flex;gap:10px;font-size:18px;color:var(--white);line-height:1.5;"><span style="color:var(--red);flex-shrink:0;">▸</span><span>SNS分析 &amp; 企業案件サポート（クリエイター向け）</span></div>
       </div>
     </div>
 
     <div class="card" style="padding:22px 24px;">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
-        <span style="font-size:clamp(16px,1.8vw,22px);font-weight:900;color:var(--white);white-space:nowrap;">Licore株式会社</span>
-        <span style="font-size:10px;background:#222;border:1px solid #444;color:var(--white);font-weight:700;padding:2px 8px;border-radius:3px;font-family:monospace;flex-shrink:0;">BtoC</span>
+        <span style="font-size:clamp(20px,2.15vw,28px);font-weight:900;color:var(--white);white-space:nowrap;">Licore株式会社</span>
+        <span style="font-size:19px;background:#222;border:1px solid #444;color:var(--white);font-weight:700;padding:2px 8px;border-radius:3px;font-family:monospace;flex-shrink:0;">BtoC</span>
       </div>
-      <div style="font-size:11px;color:var(--muted);font-family:monospace;margin-bottom:14px;">2023年設立</div>
+      <div style="font-size:17px;color:var(--muted);font-family:monospace;margin-bottom:14px;">2023年設立</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
-        <div style="display:flex;gap:10px;font-size:15px;color:var(--white);line-height:1.5;"><span style="color:var(--red);flex-shrink:0;">▸</span><span>ライブ配信事業</span></div>
-        <div style="display:flex;gap:10px;font-size:15px;color:var(--white);line-height:1.5;"><span style="color:var(--red);flex-shrink:0;">▸</span><span>ライブコマース事業</span></div>
+        <div style="display:flex;gap:10px;font-size:18px;color:var(--white);line-height:1.5;"><span style="color:var(--red);flex-shrink:0;">▸</span><span>ライブ配信事業</span></div>
+        <div style="display:flex;gap:10px;font-size:18px;color:var(--white);line-height:1.5;"><span style="color:var(--red);flex-shrink:0;">▸</span><span>ライブコマース事業</span></div>
       </div>
     </div>
 
   </div>
 
-  <div class="snum">03 / 10</div>
+  <div class="snum">03 / 11</div>
 </div>
 
 <!-- ══ 04 WHY ══ -->
 <div class="slide">
   <div class="eyebrow">01  Why — なぜやるのか</div>
-  <h1 style="font-size:clamp(28px,3.8vw,54px);line-height:1.25;margin-bottom:36px;white-space:nowrap;">女性が本当に<span class="r">大好きだから、</span><br>女性の夢を全力で応援し、<br><span class="r">幸せな人生を掴むサポートを！！</span></h1>
+  <h1 style="font-size:clamp(36px,4.45vw,66px);line-height:1.18;margin-bottom:30px;">女性が好き。<br><span class="r">だから、女性が稼ぐ力を作る。</span></h1>
   <div style="width:48px;height:3px;background:var(--red);margin-bottom:28px;"></div>
-  <div style="font-size:clamp(16px,1.8vw,22px);color:var(--pale);line-height:1.9;">
-    誰よりも女性と向き合ってきた。その中で気づいた。<br>
-    <strong style="color:var(--white);">夢はある。でも、叶え方がわからない女性が多すぎる。</strong><br>
-    だから、SNSで人生が変えられることを証明したい。
+  <div style="font-size:clamp(20px,2.15vw,28px);color:var(--pale);line-height:1.9;">
+    最初の動機は、正直かなり俗っぽかった。<br>
+    でも、向き合い続けた先で見えたのは、<strong style="color:var(--white);">夢はあるのに、叶え方がわからない女性が多い</strong>という現実でした。<br>
+    だから僕は、SNSで人生を変えられることを証明したい。
   </div>
   <div class="snum">04 / 11</div>
 </div>
@@ -300,16 +301,16 @@ h1 .d { color:var(--pale); }
   <div class="eyebrow">02  Why Local — 地方創生をやりたい理由</div>
   <h1>地方の会社が<br><span class="r">潰れる理由、<br>全部見てきた。</span></h1>
   <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;">
-    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(14px,1.55vw,20px);font-weight:700;color:var(--pale);">良い商品が届かない</div>
-    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(14px,1.55vw,20px);font-weight:700;color:var(--pale);">マーケティングの壁</div>
-    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(14px,1.55vw,20px);font-weight:700;color:var(--pale);">後継者がいない</div>
-    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(14px,1.55vw,20px);font-weight:700;color:var(--pale);">SNSで見せられない</div>
-    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(14px,1.55vw,20px);font-weight:700;color:var(--pale);">動画が作れない</div>
-    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(14px,1.55vw,20px);font-weight:700;color:var(--pale);">人材が来ない</div>
-    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(14px,1.55vw,20px);font-weight:700;color:var(--pale);">都市部との情報格差</div>
-    <div style="background:#111;border:1px solid var(--red);border-radius:4px;padding:11px 22px;font-size:clamp(14px,1.55vw,20px);font-weight:700;color:var(--red);">廃業が止まらない</div>
+    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(18px,1.90vw,26px);font-weight:700;color:var(--pale);">良い商品が届かない</div>
+    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(18px,1.90vw,26px);font-weight:700;color:var(--pale);">マーケティングの壁</div>
+    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(18px,1.90vw,26px);font-weight:700;color:var(--pale);">後継者がいない</div>
+    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(18px,1.90vw,26px);font-weight:700;color:var(--pale);">SNSで見せられない</div>
+    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(18px,1.90vw,26px);font-weight:700;color:var(--pale);">動画が作れない</div>
+    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(18px,1.90vw,26px);font-weight:700;color:var(--pale);">人材が来ない</div>
+    <div style="background:#111;border:1px solid #2a2a2a;border-radius:4px;padding:11px 22px;font-size:clamp(18px,1.90vw,26px);font-weight:700;color:var(--pale);">都市部との情報格差</div>
+    <div style="background:#111;border:1px solid var(--red);border-radius:4px;padding:11px 22px;font-size:clamp(18px,1.90vw,26px);font-weight:700;color:var(--red);">廃業が止まらない</div>
   </div>
-  <div style="background:#0e0e0e;border:1px solid #2a2a2a;border-left:4px solid var(--red);border-radius:4px;padding:14px 20px;margin-top:20px;font-size:15px;color:var(--pale);line-height:1.7;">
+  <div style="background:#0e0e0e;border:1px solid #2a2a2a;border-left:4px solid var(--red);border-radius:4px;padding:14px 20px;margin-top:20px;font-size:18px;color:var(--pale);line-height:1.7;">
     47都道府県を回って気づいた。<strong style="color:var(--white);">地方企業の売上と女性のキャリアを、SNS起点で同時に作る</strong>——それがJOKER'Sがやる理由。
   </div>
   <div class="snum">05 / 11</div>
@@ -325,7 +326,7 @@ h1 .d { color:var(--pale); }
     <div class="kpi card"><div class="val">TikTok Shop / EC</div><div class="cap">地方商品を全国へ。GMV連動で商流まで握る</div></div>
   </div>
   <div style="margin-top:28px;text-align:center;">
-    <div style="font-size:clamp(24px,3vw,42px);font-weight:900;color:var(--white);line-height:1.5;">
+    <div style="font-size:clamp(28px,3.35vw,48px);font-weight:900;color:var(--white);line-height:1.5;">
       女性キャリア支援 × 地方創生<br>
       <span style="color:var(--red);">勝利の切り札（ジョーカー）になる</span>
     </div>
@@ -339,101 +340,101 @@ h1 .d { color:var(--pale); }
   <h1>日本の購買が<br><span class="r">SNSとLIVEへ<br>一気に動く。</span></h1>
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-top:30px;">
     <div class="card" style="padding:20px 18px;">
-      <div style="font-size:12px;color:var(--pale);letter-spacing:.1em;font-family:monospace;font-weight:700;margin-bottom:10px;">国内 SNSマーケ市場</div>
-      <div style="font-size:clamp(26px,3vw,44px);font-weight:900;font-family:monospace;color:var(--red);line-height:1;">1.2兆円</div>
-      <div style="font-size:13px;color:var(--white);font-weight:600;margin-top:10px;">→ 2029年 <strong style="color:var(--red);">2.1兆円</strong>予測</div>
+      <div style="font-size:18px;color:var(--pale);letter-spacing:.1em;font-family:monospace;font-weight:700;margin-bottom:10px;">国内 SNSマーケ市場</div>
+      <div style="font-size:clamp(30px,3.35vw,50px);font-weight:900;font-family:monospace;color:var(--red);line-height:1;">1.2兆円</div>
+      <div style="font-size:19px;color:var(--white);font-weight:600;margin-top:10px;">→ 2029年 <strong style="color:var(--red);">2.1兆円</strong>予測</div>
     </div>
     <div class="card" style="padding:20px 18px;border-color:var(--red);">
-      <div style="font-size:12px;color:var(--red);letter-spacing:.1em;font-family:monospace;font-weight:700;margin-bottom:10px;">日本 TikTok Shop GMV</div>
-      <div style="font-size:clamp(26px,3vw,44px);font-weight:900;font-family:monospace;color:var(--white);line-height:1;">月60億円</div>
-      <div style="font-size:13px;color:var(--white);font-weight:600;margin-top:10px;">6月ローンチ → 12月 <span style="color:var(--red);font-weight:700;">15倍</span>。まだ立ち上がり</div>
+      <div style="font-size:18px;color:var(--red);letter-spacing:.1em;font-family:monospace;font-weight:700;margin-bottom:10px;">日本 TikTok Shop GMV</div>
+      <div style="font-size:clamp(30px,3.35vw,50px);font-weight:900;font-family:monospace;color:var(--white);line-height:1;">月60億円</div>
+      <div style="font-size:19px;color:var(--white);font-weight:600;margin-top:10px;">6月ローンチ → 12月 <span style="color:var(--red);font-weight:700;">15倍</span>。まだ立ち上がり</div>
     </div>
     <div class="card" style="padding:20px 18px;">
-      <div style="font-size:12px;color:var(--pale);letter-spacing:.1em;font-family:monospace;font-weight:700;margin-bottom:10px;">世界 TikTok Shop GMV</div>
-      <div style="font-size:clamp(26px,3vw,44px);font-weight:900;font-family:monospace;color:var(--red);line-height:1;">9.6兆円</div>
-      <div style="font-size:13px;color:var(--white);font-weight:600;margin-top:10px;">$64.3B × 150円換算 / 2025年実績</div>
+      <div style="font-size:18px;color:var(--pale);letter-spacing:.1em;font-family:monospace;font-weight:700;margin-bottom:10px;">世界 TikTok Shop GMV</div>
+      <div style="font-size:clamp(30px,3.35vw,50px);font-weight:900;font-family:monospace;color:var(--red);line-height:1;">9.6兆円</div>
+      <div style="font-size:19px;color:var(--white);font-weight:600;margin-top:10px;">$64.3B × 150円換算 / 2025年実績</div>
     </div>
     <div class="card" style="padding:20px 18px;">
-      <div style="font-size:12px;color:var(--pale);letter-spacing:.1em;font-family:monospace;font-weight:700;margin-bottom:10px;">国内 LIVE投げ銭市場</div>
-      <div style="font-size:clamp(26px,3vw,44px);font-weight:900;font-family:monospace;color:var(--red);line-height:1;">2,400億円</div>
-      <div style="font-size:13px;color:var(--white);font-weight:600;margin-top:10px;">年間規模 / ライブ配信市場が急拡大</div>
+      <div style="font-size:18px;color:var(--pale);letter-spacing:.1em;font-family:monospace;font-weight:700;margin-bottom:10px;">国内 LIVE投げ銭市場</div>
+      <div style="font-size:clamp(30px,3.35vw,50px);font-weight:900;font-family:monospace;color:var(--red);line-height:1;">2,400億円</div>
+      <div style="font-size:19px;color:var(--white);font-weight:600;margin-top:10px;">年間規模 / ライブ配信市場が急拡大</div>
     </div>
   </div>
-  <div style="margin-top:20px;font-size:clamp(13px,1.4vw,17px);color:var(--pale);line-height:1.75;border-top:1px solid var(--border);padding-top:16px;">
+  <div style="margin-top:20px;font-size:clamp(17px,1.75vw,23px);color:var(--pale);line-height:1.75;border-top:1px solid var(--border);padding-top:16px;">
     SNS・LIVE・ECの市場はすべて<strong style="color:var(--white);">同時に、今この瞬間に拡大している。</strong>5年後・10年後には「SNSで買うのが当たり前」になる。この波に乗れるプレイヤーは、<strong style="color:var(--red);">今しかいない。</strong>
   </div>
   <div class="snum">07 / 11</div>
 </div>
 
 
-<!-- ══ 09 PLAN ══ -->
+<!-- ══ 08 PLAN ══ -->
 <div class="slide">
-  <div class="eyebrow">06  Financial Plan — 売上・利益ロードマップ</div>
-  <h1 style="font-size:clamp(22px,2.8vw,36px);margin-bottom:20px;">5年<span class="r">100億</span>は、売上だけでなく<span class="r">利益</span>でも逆算する。</h1>
+  <div class="eyebrow">05  Financial Plan — 売上・利益ロードマップ</div>
+  <h1 style="font-size:clamp(26px,3.15vw,42px);margin-bottom:20px;">5年<span class="r">100億</span>は、売上だけでなく<span class="r">利益</span>でも逆算する。</h1>
 
   <!-- milestone bar -->
   <div style="display:flex;align-items:stretch;gap:0;margin-bottom:20px;">
 
     <div style="text-align:center;padding:14px 16px;background:#111;border:1px solid #2a2a2a;border-radius:6px;min-width:80px;">
-      <div style="font-size:11px;color:var(--pale);font-family:monospace;font-weight:700;margin-bottom:6px;">現在</div>
-      <div style="font-size:clamp(18px,2vw,26px);font-weight:900;color:var(--pale);font-family:monospace;line-height:1;">4.4億</div>
-      <div style="font-size:11px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 3.1億<br>営利 0.8億</div>
+      <div style="font-size:17px;color:var(--pale);font-family:monospace;font-weight:700;margin-bottom:6px;">現在</div>
+      <div style="font-size:clamp(22px,2.35vw,32px);font-weight:900;color:var(--pale);font-family:monospace;line-height:1;">4.4億</div>
+      <div style="font-size:17px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 3.1億<br>営利 0.8億</div>
     </div>
     <div style="flex:1;height:1px;background:linear-gradient(to right,#333,#555);align-self:center;margin:0 4px;"></div>
 
     <div style="text-align:center;padding:14px 16px;background:#111;border:1px solid #2a2a2a;border-radius:6px;min-width:80px;">
-      <div style="font-size:11px;color:var(--pale);font-family:monospace;font-weight:700;margin-bottom:6px;">1年後</div>
-      <div style="font-size:clamp(18px,2vw,26px);font-weight:900;color:var(--white);font-family:monospace;line-height:1;">13億</div>
-      <div style="font-size:11px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 7.5億<br>営利 2.5億</div>
+      <div style="font-size:17px;color:var(--pale);font-family:monospace;font-weight:700;margin-bottom:6px;">1年後</div>
+      <div style="font-size:clamp(22px,2.35vw,32px);font-weight:900;color:var(--white);font-family:monospace;line-height:1;">13億</div>
+      <div style="font-size:17px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 7.5億<br>営利 2.5億</div>
     </div>
     <div style="flex:1;height:1px;background:linear-gradient(to right,#555,#888);align-self:center;margin:0 4px;"></div>
 
     <div style="text-align:center;padding:14px 16px;background:#111;border:1px solid #2a2a2a;border-radius:6px;min-width:80px;">
-      <div style="font-size:11px;color:var(--pale);font-family:monospace;font-weight:700;margin-bottom:6px;">3年後</div>
-      <div style="font-size:clamp(18px,2vw,26px);font-weight:900;color:var(--white);font-family:monospace;line-height:1;">55億</div>
-      <div style="font-size:11px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 30億<br>営利 10億</div>
+      <div style="font-size:17px;color:var(--pale);font-family:monospace;font-weight:700;margin-bottom:6px;">3年後</div>
+      <div style="font-size:clamp(22px,2.35vw,32px);font-weight:900;color:var(--white);font-family:monospace;line-height:1;">55億</div>
+      <div style="font-size:17px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 30億<br>営利 10億</div>
     </div>
     <div style="flex:1;height:2px;background:linear-gradient(to right,#888,var(--red));align-self:center;margin:0 4px;"></div>
 
     <div style="text-align:center;padding:14px 16px;background:#1a0000;border:2px solid var(--red);border-radius:6px;min-width:90px;">
-      <div style="font-size:10px;color:var(--red);font-family:monospace;margin-bottom:6px;">5年後</div>
-      <div style="font-size:clamp(20px,2.4vw,30px);font-weight:900;color:var(--red);font-family:monospace;line-height:1;">100億</div>
-      <div style="font-size:11px;color:var(--white);font-weight:700;margin-top:6px;line-height:1.6;">粗利 50億<br>営利 17億</div>
+      <div style="font-size:19px;color:var(--red);font-family:monospace;margin-bottom:6px;">5年後</div>
+      <div style="font-size:clamp(24px,2.75vw,36px);font-weight:900;color:var(--red);font-family:monospace;line-height:1;">100億</div>
+      <div style="font-size:17px;color:var(--white);font-weight:700;margin-top:6px;line-height:1.6;">粗利 50億<br>営利 17億</div>
     </div>
     <div style="flex:1;height:2px;background:linear-gradient(to right,var(--red),#ff4444);align-self:center;margin:0 4px;"></div>
 
     <div style="text-align:center;padding:14px 16px;background:#1a0000;border:2px solid var(--red);border-radius:6px;min-width:100px;">
-      <div style="font-size:10px;color:var(--red);font-family:monospace;margin-bottom:6px;">10年後</div>
-      <div style="font-size:clamp(20px,2.4vw,30px);font-weight:900;color:var(--red);font-family:monospace;line-height:1;">1,000億</div>
-      <div style="font-size:11px;color:var(--white);font-weight:700;margin-top:6px;line-height:1.6;">粗利 446億<br>営利 160億</div>
+      <div style="font-size:19px;color:var(--red);font-family:monospace;margin-bottom:6px;">10年後</div>
+      <div style="font-size:clamp(24px,2.75vw,36px);font-weight:900;color:var(--red);font-family:monospace;line-height:1;">1,000億</div>
+      <div style="font-size:17px;color:var(--white);font-weight:700;margin-top:6px;line-height:1.6;">粗利 446億<br>営利 160億</div>
     </div>
 
   </div>
 
   <!-- 5年後 内訳ラベル -->
-  <div style="font-size:15px;letter-spacing:.1em;color:var(--red);font-family:monospace;font-weight:700;margin-bottom:10px;">5年後 100億 — 事業別内訳</div>
+  <div style="font-size:18px;letter-spacing:.1em;color:var(--red);font-family:monospace;font-weight:700;margin-bottom:10px;">5年後 100億 — 事業別内訳</div>
 
   <!-- 5年内訳 4カード -->
   <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:14px;">
     <div class="card" style="padding:16px 18px;">
-      <div style="font-size:13px;color:var(--pale);font-weight:700;margin-bottom:8px;">SNSマーケ</div>
-      <div style="font-size:clamp(20px,2.2vw,30px);font-weight:900;color:var(--white);font-family:monospace;">40億</div>
-      <div style="font-size:12px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 18億<br>営利 6億</div>
+      <div style="font-size:19px;color:var(--pale);font-weight:700;margin-bottom:8px;">SNSマーケ</div>
+      <div style="font-size:clamp(24px,2.55vw,36px);font-weight:900;color:var(--white);font-family:monospace;">40億</div>
+      <div style="font-size:18px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 18億<br>営利 6億</div>
     </div>
     <div class="card" style="padding:16px 18px;">
-      <div style="font-size:13px;color:var(--pale);font-weight:700;margin-bottom:8px;">ライブ配信</div>
-      <div style="font-size:clamp(20px,2.2vw,30px);font-weight:900;color:var(--white);font-family:monospace;">25億</div>
-      <div style="font-size:12px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 21億<br>営利 8.5億</div>
+      <div style="font-size:19px;color:var(--pale);font-weight:700;margin-bottom:8px;">ライブ配信</div>
+      <div style="font-size:clamp(24px,2.55vw,36px);font-weight:900;color:var(--white);font-family:monospace;">25億</div>
+      <div style="font-size:18px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 21億<br>営利 8.5億</div>
     </div>
     <div class="card" style="padding:16px 18px;">
-      <div style="font-size:13px;color:var(--pale);font-weight:700;margin-bottom:8px;">TikTok Shop</div>
-      <div style="font-size:clamp(20px,2.2vw,30px);font-weight:900;color:var(--white);font-family:monospace;">25億</div>
-      <div style="font-size:12px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 6億<br>営利 1.5億</div>
+      <div style="font-size:19px;color:var(--pale);font-weight:700;margin-bottom:8px;">TikTok Shop</div>
+      <div style="font-size:clamp(24px,2.55vw,36px);font-weight:900;color:var(--white);font-family:monospace;">25億</div>
+      <div style="font-size:18px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 6億<br>営利 1.5億</div>
     </div>
     <div class="card" style="padding:16px 18px;">
-      <div style="font-size:13px;color:var(--pale);font-weight:700;margin-bottom:8px;">新規事業</div>
-      <div style="font-size:clamp(20px,2.2vw,30px);font-weight:900;color:var(--white);font-family:monospace;">10億</div>
-      <div style="font-size:12px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 5億<br>営利 1億</div>
+      <div style="font-size:19px;color:var(--pale);font-weight:700;margin-bottom:8px;">新規事業</div>
+      <div style="font-size:clamp(24px,2.55vw,36px);font-weight:900;color:var(--white);font-family:monospace;">10億</div>
+      <div style="font-size:18px;color:var(--pale);margin-top:6px;line-height:1.6;">粗利 5億<br>営利 1億</div>
     </div>
   </div>
 
@@ -442,15 +443,14 @@ h1 .d { color:var(--pale); }
 
 <!-- ══ 09 IMPACT ══ -->
 <div class="slide">
-  <div class="eyebrow">07  Social Impact — 女性キャリア支援の規模</div>
+  <div class="eyebrow">06  Social Impact — 女性キャリア支援の規模</div>
 
   <!-- headline -->
-  <div style="font-size:clamp(16px,2vw,26px);font-weight:900;line-height:1.3;letter-spacing:-.02em;margin-bottom:4px;">
-    <span style="color:var(--red);">SNS版オンラインキャバクラ</span> /
-    <span style="color:var(--red);">SNS版ヤクルトレディー</span>を<br>
-    全国４７都道府県に拠点を作る。
+  <div style="font-size:clamp(20px,2.35vw,32px);font-weight:900;line-height:1.3;letter-spacing:-.02em;margin-bottom:4px;">
+    接客力を、SNS上の稼ぐ力へ。<br>
+    <span style="color:var(--red);">47都道府県に「SNS版ヤクルトレディー」を作る。</span>
   </div>
-  <div style="font-size:13px;color:var(--pale);margin-bottom:12px;line-height:1.5;">
+  <div style="font-size:19px;color:var(--pale);margin-bottom:12px;line-height:1.5;">
     女性のキャリアの切り札＝<strong style="color:var(--white);">「働くならここだよね」</strong>と言われる存在へ。
   </div>
 
@@ -458,27 +458,27 @@ h1 .d { color:var(--pale); }
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;">
 
     <div style="background:#0d0d0d;border:1px solid #222;border-radius:6px;padding:10px 10px;text-align:center;">
-      <div style="font-size:11px;letter-spacing:.08em;color:var(--white);font-family:monospace;font-weight:700;margin-bottom:6px;white-space:nowrap;">10年後 / 支援女性数</div>
-      <div style="font-size:clamp(22px,2.6vw,36px);font-weight:900;color:var(--red);font-family:monospace;line-height:1;">10万人</div>
-      <div style="font-size:11px;color:var(--pale);margin-top:6px;line-height:1.5;">3年後　1万人<br>5年後　3万人</div>
+      <div style="font-size:17px;letter-spacing:.08em;color:var(--white);font-family:monospace;font-weight:700;margin-bottom:6px;white-space:nowrap;">10年後 / 支援女性数</div>
+      <div style="font-size:clamp(26px,2.95vw,42px);font-weight:900;color:var(--red);font-family:monospace;line-height:1;">10万人</div>
+      <div style="font-size:17px;color:var(--pale);margin-top:6px;line-height:1.5;">3年後　1万人<br>5年後　3万人</div>
     </div>
 
     <div style="background:#0d0d0d;border:1px solid #222;border-radius:6px;padding:10px 10px;text-align:center;">
-      <div style="font-size:11px;letter-spacing:.08em;color:var(--white);font-family:monospace;font-weight:700;margin-bottom:6px;white-space:nowrap;">10年後 / 地方企業支援</div>
-      <div style="font-size:clamp(22px,2.6vw,36px);font-weight:900;color:var(--red);font-family:monospace;line-height:1;">1万社</div>
-      <div style="font-size:11px;color:var(--pale);margin-top:6px;line-height:1.5;">3年後　1,000社<br>5年後　3,000社</div>
+      <div style="font-size:17px;letter-spacing:.08em;color:var(--white);font-family:monospace;font-weight:700;margin-bottom:6px;white-space:nowrap;">10年後 / 地方企業支援</div>
+      <div style="font-size:clamp(26px,2.95vw,42px);font-weight:900;color:var(--red);font-family:monospace;line-height:1;">1万社</div>
+      <div style="font-size:17px;color:var(--pale);margin-top:6px;line-height:1.5;">3年後　1,000社<br>5年後　3,000社</div>
     </div>
 
     <div style="background:#0d0d0d;border:1px solid #222;border-radius:6px;padding:10px 10px;text-align:center;">
-      <div style="font-size:11px;letter-spacing:.08em;color:var(--white);font-family:monospace;font-weight:700;margin-bottom:6px;white-space:nowrap;">10年後 / コア販売人材</div>
-      <div style="font-size:clamp(22px,2.6vw,36px);font-weight:900;color:var(--red);font-family:monospace;line-height:1;">1万人</div>
-      <div style="font-size:11px;color:var(--pale);margin-top:6px;line-height:1.5;">3年後　1,000人<br>5年後　3,000人</div>
+      <div style="font-size:17px;letter-spacing:.08em;color:var(--white);font-family:monospace;font-weight:700;margin-bottom:6px;white-space:nowrap;">10年後 / コア販売人材</div>
+      <div style="font-size:clamp(26px,2.95vw,42px);font-weight:900;color:var(--red);font-family:monospace;line-height:1;">1万人</div>
+      <div style="font-size:17px;color:var(--pale);margin-top:6px;line-height:1.5;">3年後　1,000人<br>5年後　3,000人</div>
     </div>
 
     <div style="background:#1a0000;border:2px solid var(--red);border-radius:6px;padding:10px 10px;text-align:center;">
-      <div style="font-size:10px;letter-spacing:.1em;color:var(--red);font-family:monospace;margin-bottom:6px;white-space:nowrap;">10年後 / 所得インパクト</div>
-      <div style="font-size:clamp(20px,2.4vw,32px);font-weight:900;color:var(--red);font-family:monospace;line-height:1;">1,200億+</div>
-      <div style="font-size:11px;color:var(--pale);margin-top:6px;line-height:1.5;">女性の年間<br>所得創出（推計）</div>
+      <div style="font-size:19px;letter-spacing:.1em;color:var(--red);font-family:monospace;margin-bottom:6px;white-space:nowrap;">10年後 / 所得インパクト</div>
+      <div style="font-size:clamp(24px,2.75vw,38px);font-weight:900;color:var(--red);font-family:monospace;line-height:1;">1,200億+</div>
+      <div style="font-size:17px;color:var(--pale);margin-top:6px;line-height:1.5;">女性の年間<br>所得創出（推計）</div>
     </div>
 
   </div>
@@ -486,19 +486,19 @@ h1 .d { color:var(--pale); }
   <!-- model comparison -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
     <div style="background:#111;border:1px solid #2a2a2a;border-radius:6px;padding:12px 18px;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:clamp(14px,1.6vw,19px);font-weight:900;color:var(--white);white-space:nowrap;flex-shrink:0;">ライブ配信</div>
+      <div style="font-size:clamp(18px,1.95vw,25px);font-weight:900;color:var(--white);white-space:nowrap;flex-shrink:0;">ライブ配信</div>
       <div style="font-size:18px;color:var(--muted);flex-shrink:0;">=</div>
       <div>
-        <div style="font-size:clamp(14px,1.6vw,19px);font-weight:900;color:var(--red);white-space:nowrap;">SNS版キャバクラ</div>
-        <div style="font-size:11px;color:var(--pale);margin-top:3px;">会話力・関係構築でファンを獲得</div>
+        <div style="font-size:clamp(18px,1.95vw,25px);font-weight:900;color:var(--red);white-space:nowrap;">SNS時代の接客キャリア</div>
+        <div style="font-size:17px;color:var(--pale);margin-top:3px;">会話力・関係構築でファンを獲得</div>
       </div>
     </div>
     <div style="background:#111;border:1px solid var(--red);border-radius:6px;padding:12px 18px;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:clamp(14px,1.6vw,19px);font-weight:900;color:var(--white);white-space:nowrap;flex-shrink:0;">ライブコマース</div>
+      <div style="font-size:clamp(18px,1.95vw,25px);font-weight:900;color:var(--white);white-space:nowrap;flex-shrink:0;">ライブコマース</div>
       <div style="font-size:18px;color:var(--muted);flex-shrink:0;">=</div>
       <div>
-        <div style="font-size:clamp(14px,1.6vw,19px);font-weight:900;color:var(--red);white-space:nowrap;">SNS版ヤクルトレディー</div>
-        <div style="font-size:11px;color:var(--pale);margin-top:3px;">接客・商品理解で購買を生む</div>
+        <div style="font-size:clamp(18px,1.95vw,25px);font-weight:900;color:var(--red);white-space:nowrap;">SNS版ヤクルトレディー</div>
+        <div style="font-size:17px;color:var(--pale);margin-top:3px;">接客・商品理解で購買を生む</div>
       </div>
     </div>
   </div>
@@ -508,45 +508,45 @@ h1 .d { color:var(--pale); }
 
 <!-- ══ 10 STUCK ══ -->
 <div class="slide">
-  <div class="eyebrow">07  Where I'm Stuck — 今ここで詰まっている</div>
-  <h1 style="font-size:clamp(30px,3.8vw,52px);margin-bottom:28px;">皆様の<span class="r">知見をお借りしたい、</span><br>4つの課題。</h1>
+  <div class="eyebrow">07  Advice Needed — 今ここで詰まっている</div>
+  <h1 style="font-size:clamp(34px,4.15vw,58px);margin-bottom:28px;">皆様の<span class="r">知見をお借りしたい、</span><br>4つの課題。</h1>
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
 
     <div class="card" style="padding:24px 26px;">
-      <div style="font-size:11px;color:var(--muted);font-family:monospace;font-weight:700;letter-spacing:.1em;margin-bottom:10px;">01</div>
-      <div style="font-size:clamp(22px,2.8vw,38px);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:12px;">営業・<br>地域開拓</div>
-      <div style="font-size:13px;color:var(--pale);line-height:1.65;">地方企業・ライバー・ライブコマース人材を属人的でなく<span style="color:var(--red);">地域単位で獲得する</span>仕組みをどう作るか。</div>
+      <div style="font-size:17px;color:var(--muted);font-family:monospace;font-weight:700;letter-spacing:.1em;margin-bottom:10px;">01</div>
+      <div style="font-size:clamp(26px,3.15vw,44px);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:12px;">営業・<br>地域開拓</div>
+      <div style="font-size:19px;color:var(--pale);line-height:1.65;">地方企業・ライバー・ライブコマース人材を属人的でなく<span style="color:var(--red);">地域単位で獲得する</span>仕組みをどう作るか。</div>
     </div>
 
     <div class="card" style="padding:24px 26px;">
-      <div style="font-size:11px;color:var(--muted);font-family:monospace;font-weight:700;letter-spacing:.1em;margin-bottom:10px;">02</div>
-      <div style="font-size:clamp(22px,2.8vw,38px);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:12px;">行政・<br>自治体連携</div>
-      <div style="font-size:13px;color:var(--pale);line-height:1.65;">女性キャリア支援・地方創生を自治体・補助金・金融機関と<span style="color:var(--red);">どう接続するか。</span></div>
+      <div style="font-size:17px;color:var(--muted);font-family:monospace;font-weight:700;letter-spacing:.1em;margin-bottom:10px;">02</div>
+      <div style="font-size:clamp(26px,3.15vw,44px);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:12px;">行政・<br>自治体連携</div>
+      <div style="font-size:19px;color:var(--pale);line-height:1.65;">女性キャリア支援・地方創生を自治体・補助金・金融機関と<span style="color:var(--red);">どう接続するか。</span></div>
     </div>
 
     <div class="card" style="padding:24px 26px;">
-      <div style="font-size:11px;color:var(--muted);font-family:monospace;font-weight:700;letter-spacing:.1em;margin-bottom:10px;">03</div>
-      <div style="font-size:clamp(22px,2.8vw,38px);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:12px;">採用</div>
-      <div style="font-size:13px;color:var(--pale);line-height:1.65;">ビジョンに共感し、事業を本気で背負える<span style="color:var(--red);">幹部・仲間をどう採るか。</span></div>
+      <div style="font-size:17px;color:var(--muted);font-family:monospace;font-weight:700;letter-spacing:.1em;margin-bottom:10px;">03</div>
+      <div style="font-size:clamp(26px,3.15vw,44px);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:12px;">採用</div>
+      <div style="font-size:19px;color:var(--pale);line-height:1.65;">ビジョンに共感し、事業を本気で背負える<span style="color:var(--red);">幹部・仲間をどう採るか。</span></div>
     </div>
 
     <div class="card" style="padding:24px 26px;">
-      <div style="font-size:11px;color:var(--muted);font-family:monospace;font-weight:700;letter-spacing:.1em;margin-bottom:10px;">04</div>
-      <div style="font-size:clamp(22px,2.8vw,38px);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:12px;">ブランディング</div>
-      <div style="font-size:13px;color:var(--pale);line-height:1.65;">「SNS・LIVE・ECで地方と女性を伸ばす会社」として<span style="color:var(--red);">誰に・何の第一想起を取りに行くか。</span></div>
+      <div style="font-size:17px;color:var(--muted);font-family:monospace;font-weight:700;letter-spacing:.1em;margin-bottom:10px;">04</div>
+      <div style="font-size:clamp(26px,3.15vw,44px);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:12px;">ブランディング</div>
+      <div style="font-size:19px;color:var(--pale);line-height:1.65;">「SNS・LIVE・ECで地方と女性を伸ばす会社」として<span style="color:var(--red);">誰に・何の第一想起を取りに行くか。</span></div>
     </div>
 
   </div>
-  <div class="snum">10 / 10</div>
+  <div class="snum">10 / 11</div>
 </div>
 
-<!-- ══ 10 ASK ══ -->
+<!-- ══ 11 ASK ══ -->
 <div class="slide" style="justify-content:center;padding:52px 60px;">
 
-  <div style="font-size:11px;letter-spacing:.25em;color:var(--red);font-family:monospace;font-weight:700;margin-bottom:24px;">ASK</div>
+  <div style="font-size:17px;letter-spacing:.25em;color:var(--red);font-family:monospace;font-weight:700;margin-bottom:24px;">ASK</div>
 
-  <div style="font-size:clamp(32px,4.2vw,62px);font-weight:900;line-height:1.15;letter-spacing:-.03em;margin-bottom:36px;">
+  <div style="font-size:clamp(36px,4.55vw,68px);font-weight:900;line-height:1.15;letter-spacing:-.03em;margin-bottom:36px;">
     女性の夢と地方創生の切り札<br>
     <span style="color:var(--red);">＝ジョーカーズになる。</span>
   </div>
@@ -558,8 +558,8 @@ h1 .d { color:var(--pale); }
     <div style="display:flex;gap:20px;align-items:flex-start;">
       <div style="flex-shrink:0;width:3px;background:var(--red);border-radius:2px;align-self:stretch;"></div>
       <div>
-        <div style="font-size:10px;letter-spacing:.2em;color:var(--red);font-family:monospace;font-weight:700;margin-bottom:6px;">TO</div>
-        <div style="font-size:clamp(15px,1.7vw,21px);font-weight:700;color:var(--white);line-height:1.65;">
+        <div style="font-size:19px;letter-spacing:.2em;color:var(--red);font-family:monospace;font-weight:700;margin-bottom:6px;">TO</div>
+        <div style="font-size:clamp(19px,2.05vw,27px);font-weight:700;color:var(--white);line-height:1.65;">
           EO Tokyo Central 歴代会長<br>
           31期理事の皆様・本日の参加者の皆様へ
         </div>
@@ -569,8 +569,8 @@ h1 .d { color:var(--pale); }
     <div style="display:flex;gap:20px;align-items:flex-start;">
       <div style="flex-shrink:0;width:3px;background:var(--red);border-radius:2px;align-self:stretch;"></div>
       <div>
-        <div style="font-size:10px;letter-spacing:.2em;color:var(--red);font-family:monospace;font-weight:700;margin-bottom:6px;">MESSAGE</div>
-        <div style="font-size:clamp(14px,1.55vw,19px);font-weight:500;color:var(--pale);line-height:1.85;">
+        <div style="font-size:19px;letter-spacing:.2em;color:var(--red);font-family:monospace;font-weight:700;margin-bottom:6px;">MESSAGE</div>
+        <div style="font-size:clamp(18px,1.90vw,25px);font-weight:500;color:var(--pale);line-height:1.85;">
           本気でこの山を登ります。<br>
           <strong style="color:var(--white);font-weight:800;">メンター・協業という形でのお力添えをお待ちしています。</strong><br>
           一言でもアドバイスをいただけると幸いです。
@@ -580,12 +580,12 @@ h1 .d { color:var(--pale); }
 
   </div>
 
-  <div style="display:inline-flex;align-items:center;gap:14px;border:1.5px solid var(--red);border-radius:40px;padding:13px 30px;">
+  <div style="display:inline-flex;align-self:flex-start;align-items:center;gap:14px;border:1.5px solid var(--red);border-radius:40px;padding:13px 30px;">
     <div style="width:7px;height:7px;border-radius:50%;background:var(--red);"></div>
-    <span style="font-size:clamp(13px,1.4vw,17px);font-weight:700;color:var(--white);letter-spacing:.05em;">ご協力いただける方、ぜひお声がけください</span>
+    <span style="font-size:clamp(17px,1.75vw,23px);font-weight:700;color:var(--white);letter-spacing:.05em;">ご協力いただける方、ぜひお声がけください</span>
   </div>
 
-  <div class="snum">10 / 10</div>
+  <div class="snum">11 / 11</div>
 </div>
 
 <!-- ══ Nav ══ -->
