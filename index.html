@@ -142,6 +142,50 @@ h1 .d { color:var(--pale); }
 
 /* ── divider ── */
 .rule { width:56px; height:4px; background:var(--red); margin-bottom:28px; }
+
+@media (max-width: 760px) {
+  body {
+    overflow:auto;
+    height:auto;
+  }
+  .slide {
+    position:relative;
+    min-height:100dvh;
+    padding:42px 20px 64px;
+    overflow:auto;
+  }
+  .slide::before { width:3px; }
+  .eyebrow {
+    font-size:12px;
+    letter-spacing:.16em;
+    margin-bottom:18px;
+  }
+  h1 {
+    font-size:clamp(32px,11vw,48px);
+    line-height:1.12;
+    white-space:normal !important;
+  }
+  .body-text {
+    font-size:18px;
+    line-height:1.75;
+  }
+  .kpi-row,
+  .mkt-grid,
+  .trac-grid,
+  .slide [style*="display:grid"] {
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+  }
+  .card { padding:18px 16px; }
+  .kpi .val { font-size:27px; }
+  .kpi .cap { font-size:17px; }
+  .snum {
+    right:18px;
+    bottom:16px;
+    font-size:13px;
+  }
+}
 </style>
 </head>
 <body>
@@ -365,36 +409,42 @@ h1 .d { color:var(--pale); }
 <div class="slide">
   <div class="eyebrow">03  Solution — 解決策</div>
 
-  <div style="display:grid;grid-template-columns:.92fr 1.08fr;gap:36px;align-items:center;">
-    <h1 style="font-size:clamp(40px,4.8vw,68px);line-height:1.08;letter-spacing:-.03em;">
-      SNSで見せる。<br>
-      LIVEで売る。<br>
-      <span class="r">ECで届ける。</span>
-    </h1>
+  <h1 style="font-size:clamp(40px,4.65vw,68px);line-height:1.08;margin-bottom:26px;">
+    SNSで見せる。LIVEで売る。<br>
+    <span class="r">ECで届ける。</span>
+  </h1>
 
-    <div style="background:#111;border:1px solid #333;border-left:6px solid var(--red);border-radius:6px;padding:24px 30px;">
-      <div style="font-size:clamp(21px,2.25vw,32px);font-weight:900;color:var(--white);line-height:1.2;letter-spacing:-.02em;margin-bottom:14px;">
-        結論、<br><span style="color:var(--red);">他社には負けないサービスになっている。</span>
-      </div>
-      <div style="font-size:clamp(15px,1.45vw,20px);color:var(--pale);font-weight:800;line-height:1.55;">
-        本当にいいサービスだからこそ、<span style="color:var(--white);">届けないことが罪。</span><br>
-        全ての利用した人を幸せにできる自信がある。<br>
-        だから<span style="color:var(--white);">業界No.1</span>を取りに行く。<br>
-        <strong style="color:var(--white);">この課題解決は、僕にしか出来ないことであり人生を賭けた使命！</strong>
-      </div>
-    </div>
-  </div>
-
-  <div class="kpi-row" style="margin-top:34px;">
+  <div class="kpi-row" style="margin-top:0;">
     <div class="kpi card"><div class="val">SNSマーケ</div><div class="cap">企業の認知・採用・販売を作る</div></div>
     <div class="kpi card"><div class="val">ライブ配信事務所</div><div class="cap">女性クリエイター1,200名の所得機会を作る</div></div>
     <div class="kpi card"><div class="val">TikTok Shop / EC</div><div class="cap">地方商品を全国へ。商流まで握る</div></div>
   </div>
-  <div style="margin-top:24px;text-align:center;">
-    <div style="font-size:clamp(29px,3.35vw,50px);font-weight:900;color:var(--white);line-height:1.25;letter-spacing:-.025em;">
-      女性キャリア支援 × 地方創生<br>
-      <span style="color:var(--red);">勝利の切り札（ジョーカー）になる</span>
+
+  <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-top:22px;align-items:stretch;">
+    <div style="background:#111;border:1px solid #333;border-left:5px solid var(--red);border-radius:6px;padding:20px 24px;">
+      <div style="font-size:clamp(22px,2.5vw,34px);font-weight:900;color:var(--white);line-height:1.28;letter-spacing:-.02em;">
+        結論、<span style="color:var(--red);">他社には負けないサービス</span>にする。
+      </div>
+      <div style="font-size:clamp(16px,1.55vw,21px);color:var(--pale);font-weight:800;line-height:1.65;margin-top:12px;">
+        本当にいいサービスだからこそ、届けないことが罪。<br>
+        利用した人を幸せにできる自信がある。<br>
+        だから業界No.1を取りに行く。
+      </div>
     </div>
+    <div style="background:#111;border:1px solid #333;border-radius:6px;padding:20px 24px;display:flex;flex-direction:column;justify-content:center;">
+      <div style="font-size:clamp(23px,2.65vw,36px);font-weight:900;line-height:1.25;color:var(--white);letter-spacing:-.02em;">
+        女性キャリア支援<br>
+        <span style="color:var(--red);">× 地方創生</span>
+      </div>
+      <div style="font-size:clamp(17px,1.7vw,23px);color:var(--pale);font-weight:800;line-height:1.5;margin-top:10px;">
+        この課題解決は、僕にしか出来ない<br>
+        人生を賭けた使命。
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#0e0e0e;border:1px solid #2a2a2a;border-left:4px solid var(--red);border-radius:4px;padding:14px 20px;margin-top:20px;font-size:clamp(20px,2.2vw,31px);font-weight:900;color:var(--white);line-height:1.35;text-align:center;">
+    勝利の切り札（ジョーカー）になる
   </div>
   <div class="snum">06 / 11</div>
 </div>
