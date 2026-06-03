@@ -144,29 +144,62 @@ h1 .d { color:var(--pale); }
 .rule { width:56px; height:4px; background:var(--red); margin-bottom:28px; }
 
 @media (max-width: 760px) {
+  html {
+    width:100%;
+    min-height:100%;
+    overflow:hidden;
+  }
   body {
-    overflow:auto;
-    height:auto;
+    width:100%;
+    height:100dvh;
+    overflow:hidden;
+    touch-action:pan-y;
   }
   .slide {
-    position:relative;
+    position:fixed;
+    inset:0;
+    display:none;
+    height:100dvh;
     min-height:100dvh;
-    padding:42px 20px 64px;
-    overflow:auto;
+    padding:30px 16px 96px !important;
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+    justify-content:flex-start !important;
   }
+  .slide.active { display:block !important; }
   .slide::before { width:3px; }
   .eyebrow {
     font-size:12px;
     letter-spacing:.16em;
-    margin-bottom:18px;
+    margin-bottom:16px;
   }
   h1 {
     font-size:clamp(32px,11vw,48px);
     line-height:1.12;
     white-space:normal !important;
   }
+  .slide h1,
+  .slide h1[style] {
+    font-size:clamp(28px,9.5vw,40px) !important;
+    line-height:1.15 !important;
+    white-space:normal !important;
+  }
+  .slide [style*="font-size:clamp"] {
+    font-size:clamp(18px,6.2vw,30px) !important;
+    line-height:1.28 !important;
+    white-space:normal !important;
+  }
+  .slide [style*="font-size:27px"] { font-size:22px !important; }
+  .slide [style*="font-size:24px"] { font-size:18px !important; }
+  .slide [style*="font-size:22px"] { font-size:17px !important; }
+  .slide [style*="font-size:20px"] { font-size:16px !important; }
+  .slide [style*="font-size:19px"] { font-size:15px !important; }
+  .slide [style*="font-size:18px"] { font-size:15px !important; }
+  .slide [style*="font-size:17px"] { font-size:14px !important; }
+  .slide [style*="font-size:15px"] { font-size:13px !important; }
+  .slide [style*="white-space:nowrap"] { white-space:normal !important; }
   .body-text {
-    font-size:18px;
+    font-size:17px;
     line-height:1.75;
   }
   .kpi-row,
@@ -179,9 +212,10 @@ h1 .d { color:var(--pale); }
   }
   #nav {
     display:flex !important;
-    bottom:14px;
+    bottom:calc(12px + env(safe-area-inset-bottom));
     padding:9px 14px;
     gap:10px;
+    z-index:500;
   }
   #nav button {
     font-size:30px;
@@ -201,9 +235,15 @@ h1 .d { color:var(--pale); }
   .card { padding:18px 16px; }
   .kpi .val { font-size:27px; }
   .kpi .cap { font-size:17px; }
+  .blist { gap:10px; margin-top:18px; }
+  .blist li { font-size:17px; line-height:1.55; }
+  .mkt-card .mv,
+  .trac-card .tv { font-size:26px; }
+  .mkt-card .mc,
+  .trac-card .tc { font-size:16px; }
   .snum {
     right:18px;
-    bottom:16px;
+    bottom:calc(70px + env(safe-area-inset-bottom));
     font-size:13px;
   }
 }
@@ -796,6 +836,34 @@ h1 .d { color:var(--pale); }
 
   btnPrev.onclick = () => go(cur-1);
   btnNext.onclick = () => go(cur+1);
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let skipNextClick = false;
+  const isMobile = () => window.innerWidth <= 760;
+
+  document.addEventListener('touchstart', e => {
+    if (!isMobile() || !e.touches.length) return;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive:true });
+
+  document.addEventListener('touchend', e => {
+    if (!isMobile() || !e.changedTouches.length) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+      skipNextClick = true;
+      go(cur + (dx < 0 ? 1 : -1));
+      setTimeout(() => { skipNextClick = false; }, 250);
+    }
+  }, { passive:true });
+
+  document.addEventListener('click', e => {
+    if (!isMobile() || skipNextClick) return;
+    if (e.target.closest('#nav, button, a')) return;
+    if (e.clientY > window.innerHeight - 92) return;
+    go(cur + (e.clientX > window.innerWidth / 2 ? 1 : -1));
+  });
   document.addEventListener('keydown', e => {
     if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') go(cur+1);
     if (e.key==='ArrowLeft' ||e.key==='ArrowUp') go(cur-1);
