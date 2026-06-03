@@ -177,6 +177,27 @@ h1 .d { color:var(--pale); }
     grid-template-columns:1fr !important;
     gap:12px !important;
   }
+  #nav {
+    display:flex !important;
+    bottom:14px;
+    padding:9px 14px;
+    gap:10px;
+  }
+  #nav button {
+    font-size:30px;
+    min-width:42px;
+    min-height:42px;
+    border-radius:999px;
+  }
+  #counter {
+    font-size:16px;
+    min-width:50px;
+  }
+  .dots { gap:7px; }
+  .dot {
+    width:8px;
+    height:8px;
+  }
   .card { padding:18px 16px; }
   .kpi .val { font-size:27px; }
   .kpi .cap { font-size:17px; }
@@ -764,6 +785,7 @@ h1 .d { color:var(--pale); }
     btnPrev.disabled = cur===0;
     btnNext.disabled = cur===total-1;
     prog.style.width = `${(cur+1)/total*100}%`;
+    if (window.innerWidth <= 760) window.scrollTo({ top:0, behavior:'smooth' });
   }
 
   btnPrev.onclick = () => go(cur-1);
