@@ -247,6 +247,202 @@ h1 .d { color:var(--pale); }
     font-size:13px;
   }
 }
+
+/* ══════════ REMOTE CONTROL ══════════ */
+
+/* nav trigger */
+#nav .nav-remote {
+  font-size:12px !important;
+  font-family:'SF Mono',monospace;
+  font-weight:800;
+  letter-spacing:.14em;
+  color:var(--muted);
+  border:1px solid #2f2f2f !important;
+  border-radius:100px !important;
+  padding:5px 11px !important;
+  min-width:auto !important;
+  min-height:auto !important;
+}
+#nav .nav-remote:hover { color:var(--white); }
+
+/* ── pairing panel (presenting screen) ── */
+#remote-panel {
+  position:fixed; inset:0; z-index:900;
+  display:none; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.88);
+  backdrop-filter:blur(12px);
+  padding:20px;
+}
+#remote-panel.open { display:flex; }
+.rp-box {
+  width:100%; max-width:520px;
+  max-height:calc(100dvh - 40px);
+  overflow-y:auto;
+  background:#0c0c0c;
+  border:1px solid #2a2a2a;
+  border-left:5px solid var(--red);
+  border-radius:8px;
+  padding:32px 34px;
+}
+.rp-eyebrow {
+  font-family:'SF Mono',monospace;
+  font-size:14px; font-weight:800;
+  letter-spacing:.22em; text-transform:uppercase;
+  color:var(--red); margin-bottom:20px;
+}
+.rp-label { font-size:14px; color:var(--muted); letter-spacing:.14em; font-family:monospace; margin-bottom:9px; }
+.rp-code {
+  font-family:'SF Mono',monospace;
+  font-size:clamp(38px,8vw,58px);
+  font-weight:900; letter-spacing:.14em;
+  color:var(--white); line-height:1; margin-bottom:18px;
+}
+.rp-status {
+  display:flex; align-items:center; gap:9px;
+  font-size:14px; color:var(--pale);
+  font-family:monospace; margin-bottom:22px;
+}
+.rp-dot { width:8px; height:8px; border-radius:50%; background:#4a4a4a; flex-shrink:0; transition:all .2s; }
+.rp-dot.on { background:#25c26e; box-shadow:0 0 0 4px rgba(37,194,110,.15); }
+.rp-dot.err { background:var(--red); box-shadow:0 0 0 4px rgba(229,9,20,.15); }
+.rp-steps {
+  display:flex; flex-direction:column; gap:10px;
+  border-top:1px solid var(--border); padding-top:20px; margin-bottom:18px;
+}
+.rp-step { display:flex; align-items:center; gap:11px; font-size:16px; color:var(--pale); line-height:1.45; }
+.rp-step strong { color:var(--white); }
+.rp-n {
+  flex-shrink:0; width:21px; height:21px; border-radius:50%;
+  background:var(--red); color:#fff;
+  font-family:monospace; font-size:12px; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+}
+.rp-url {
+  font-family:monospace; font-size:13px; color:var(--muted);
+  word-break:break-all; background:#070707;
+  border:1px solid #1e1e1e; border-radius:5px;
+  padding:10px 12px; margin-bottom:18px; line-height:1.5;
+}
+.rp-actions { display:flex; gap:10px; flex-wrap:wrap; }
+.rp-actions button {
+  flex:1 1 130px; font:inherit; font-size:15px; font-weight:700;
+  padding:12px 10px; border-radius:5px; cursor:pointer;
+  background:#161616; border:1px solid #2f2f2f; color:var(--pale);
+  transition:all .15s;
+}
+.rp-actions button:hover { color:var(--white); border-color:#454545; }
+.rp-actions #rp-copy { background:var(--red); border-color:var(--red); color:#fff; }
+.rp-actions #rp-copy:hover { background:#ff1420; border-color:#ff1420; }
+.rp-hint { margin-top:16px; font-size:13px; color:#5e5e5e; font-family:monospace; line-height:1.6; }
+.rp-hint strong { color:var(--pale); }
+
+/* ── controller (phone) ── */
+body.remote-mode { overflow:hidden; background:#050505; }
+body.remote-mode .slide,
+body.remote-mode .slide.active { display:none !important; }
+body.remote-mode #nav,
+body.remote-mode #progress { display:none !important; }
+
+#remote-ui { display:none; position:fixed; inset:0; z-index:800; background:#050505; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+body.remote-mode #remote-ui { display:block; }
+.rc-wrap {
+  min-height:100dvh;
+  display:flex; flex-direction:column; gap:12px;
+  padding:calc(20px + env(safe-area-inset-top)) 16px calc(20px + env(safe-area-inset-bottom));
+  max-width:560px; margin:0 auto;
+}
+#rc-pair, #rc-main { display:none; flex-direction:column; gap:12px; flex:1; }
+#rc-pair.on, #rc-main.on { display:flex; }
+
+/* pairing form */
+.rc-eyebrow {
+  font-family:'SF Mono',monospace; font-size:13px; font-weight:800;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--red);
+}
+.rc-h { font-size:26px; font-weight:900; line-height:1.3; letter-spacing:-.02em; margin-bottom:6px; }
+#rc-input {
+  font-family:'SF Mono',monospace; font-size:34px; font-weight:900;
+  letter-spacing:.22em; text-align:center; color:var(--white);
+  background:#0d0d0d; border:1px solid #2f2f2f; border-radius:7px;
+  padding:16px 10px; width:100%; -webkit-appearance:none;
+}
+#rc-input:focus { outline:none; border-color:var(--red); }
+.rc-primary {
+  font:inherit; font-size:18px; font-weight:800; color:#fff;
+  background:var(--red); border:none; border-radius:7px;
+  padding:16px; cursor:pointer; width:100%;
+}
+.rc-ghost {
+  font:inherit; font-size:15px; font-weight:600; color:var(--muted);
+  background:none; border:1px solid #262626; border-radius:7px;
+  padding:12px; cursor:pointer; width:100%; margin-top:auto;
+}
+.rc-note { font-size:14px; color:var(--muted); line-height:1.6; }
+.rc-note strong { color:var(--pale); font-family:monospace; }
+.rc-err { font-size:14px; color:var(--red); font-weight:700; min-height:19px; }
+
+/* controller top bar */
+.rc-top {
+  display:flex; align-items:center; gap:9px;
+  font-size:13px; color:var(--pale); font-family:monospace;
+}
+.rc-top .rc-code { color:var(--muted); letter-spacing:.14em; margin-left:auto; }
+.rc-exit {
+  font:inherit; font-size:12px; font-weight:700; color:var(--muted);
+  background:none; border:1px solid #262626; border-radius:100px;
+  padding:5px 12px; cursor:pointer;
+}
+
+/* timer */
+.rc-timer { background:#0c0c0c; border:1px solid #212121; border-radius:8px; padding:16px 18px; }
+.rc-time {
+  font-family:'SF Mono',monospace; font-size:48px; font-weight:900;
+  line-height:1; letter-spacing:-.02em; color:var(--white);
+  font-variant-numeric:tabular-nums;
+}
+.rc-time.warn { color:#ffb020; }
+.rc-time.over { color:var(--red); }
+.rc-bar { height:4px; background:#1e1e1e; border-radius:2px; overflow:hidden; margin-top:12px; }
+.rc-bar-fill { height:100%; width:0; background:var(--red); border-radius:2px; transition:width .3s linear; }
+.rc-timer-actions { display:flex; align-items:center; gap:8px; margin-top:13px; }
+.rc-timer-actions button {
+  font:inherit; font-size:14px; font-weight:700; color:var(--pale);
+  background:#171717; border:1px solid #2c2c2c; border-radius:5px;
+  padding:8px 16px; cursor:pointer;
+}
+.rc-timer-actions #rc-timer-toggle { border-color:var(--red); color:var(--red); }
+.rc-target { font-size:13px; color:#5e5e5e; font-family:monospace; margin-left:auto; }
+
+/* current slide */
+.rc-now { background:#0c0c0c; border:1px solid #212121; border-left:4px solid var(--red); border-radius:8px; padding:16px 18px; }
+.rc-now-num { font-family:'SF Mono',monospace; font-size:14px; font-weight:800; letter-spacing:.16em; color:var(--red); margin-bottom:8px; }
+.rc-now-label { font-size:23px; font-weight:900; line-height:1.3; letter-spacing:-.02em; color:var(--white); }
+.rc-next { font-size:14px; color:var(--muted); margin-top:12px; padding-top:12px; border-top:1px solid #1c1c1c; line-height:1.5; }
+
+/* pads — absorb spare height so 次へ stays a big thumb target */
+.rc-pads { display:grid; grid-template-columns:1fr 1.9fr; gap:10px; flex:1 1 auto; min-height:132px; }
+.rc-pad {
+  font:inherit; cursor:pointer; border-radius:9px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:2px; padding:26px 10px; -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation; user-select:none;
+}
+.rc-pad span { font-size:38px; line-height:1; font-weight:400; }
+.rc-pad em { font-style:normal; font-size:14px; font-weight:800; letter-spacing:.08em; }
+.rc-pad.rc-back { background:#141414; border:1px solid #2c2c2c; color:var(--pale); }
+.rc-pad.rc-fwd { background:var(--red); border:1px solid var(--red); color:#fff; }
+.rc-pad:active { transform:scale(.975); }
+.rc-pad:disabled { opacity:.32; transform:none; }
+
+/* jump grid */
+.rc-jump { display:grid; grid-template-columns:repeat(6,1fr); gap:7px; }
+.rc-jump button {
+  font-family:'SF Mono',monospace; font-size:15px; font-weight:800;
+  color:var(--muted); background:#111; border:1px solid #242424;
+  border-radius:6px; padding:12px 0; cursor:pointer;
+  -webkit-tap-highlight-color:transparent; touch-action:manipulation;
+}
+.rc-jump button.on { background:var(--red); border-color:var(--red); color:#fff; }
 </style>
 </head>
 <body>
@@ -802,11 +998,96 @@ h1 .d { color:var(--pale); }
   <div class="dots" id="dots"></div>
   <span id="counter">1 / 11</span>
   <button id="btn-next">›</button>
+  <button type="button" id="btn-remote" class="nav-remote">REMOTE</button>
+</div>
+
+<!-- ══ Remote: pairing panel (presenting screen) ══ -->
+<div id="remote-panel">
+  <div class="rp-box">
+    <div class="rp-eyebrow">Remote Control — スマホで操作</div>
+    <div class="rp-label">ペアリングコード</div>
+    <div class="rp-code" id="rp-code">······</div>
+    <div class="rp-status"><span class="rp-dot" id="rp-dot"></span><span id="rp-status">待機中</span></div>
+    <div class="rp-steps">
+      <div class="rp-step"><span class="rp-n">1</span><span>スマホで同じURLを開く</span></div>
+      <div class="rp-step"><span class="rp-n">2</span><span>画面下の <strong>REMOTE</strong> をタップ</span></div>
+      <div class="rp-step"><span class="rp-n">3</span><span>上のコードを入力して接続</span></div>
+    </div>
+    <div class="rp-url" id="rp-url"></div>
+    <div class="rp-actions">
+      <button type="button" id="rp-copy">リモコンURLをコピー</button>
+      <button type="button" id="rp-close">閉じる</button>
+    </div>
+    <div class="rp-hint">キーボード <strong>R</strong> で開閉 / <strong>←→ Space</strong> でスライド操作</div>
+  </div>
+</div>
+
+<!-- ══ Remote: controller (phone) ══ -->
+<div id="remote-ui">
+  <div class="rc-wrap">
+
+    <div id="rc-pair">
+      <div class="rc-eyebrow">Remote Control</div>
+      <div class="rc-h">発表画面のコードを<br>入力してください</div>
+      <input id="rc-input" type="text" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="000000">
+      <div class="rc-err" id="rc-err"></div>
+      <button type="button" class="rc-primary" id="rc-connect">接続する</button>
+      <div class="rc-note">発表用のPCでこのスライドを開き、<strong>R</strong> キーを押すとコードが表示されます。</div>
+      <button type="button" class="rc-ghost" id="rc-cancel">スライド表示に戻る</button>
+    </div>
+
+    <div id="rc-main">
+      <div class="rc-top">
+        <span class="rp-dot" id="rc-dot"></span>
+        <span id="rc-status">接続中…</span>
+        <span class="rc-code" id="rc-code"></span>
+        <button type="button" class="rc-exit" id="rc-exit">終了</button>
+      </div>
+
+      <div class="rc-timer">
+        <div class="rc-time" id="rc-time">0:00</div>
+        <div class="rc-bar"><div class="rc-bar-fill" id="rc-bar"></div></div>
+        <div class="rc-timer-actions">
+          <button type="button" id="rc-timer-toggle">開始</button>
+          <button type="button" id="rc-timer-reset">リセット</button>
+          <span class="rc-target">目標 3:00</span>
+        </div>
+      </div>
+
+      <div class="rc-now">
+        <div class="rc-now-num" id="rc-num">01 / 11</div>
+        <div class="rc-now-label" id="rc-label">—</div>
+        <div class="rc-next" id="rc-next">次 — </div>
+      </div>
+
+      <div class="rc-pads">
+        <button type="button" class="rc-pad rc-back" id="rc-prev"><span>‹</span><em>戻る</em></button>
+        <button type="button" class="rc-pad rc-fwd" id="rc-fwd"><span>›</span><em>次へ</em></button>
+      </div>
+
+      <div class="rc-jump" id="rc-jump"></div>
+    </div>
+
+  </div>
 </div>
 
 <script>
+  /* ══════════ slide deck ══════════ */
   const slides = [...document.querySelectorAll('.slide')];
   const total = slides.length;
+  const LABELS = [
+    '表紙 — BHAG / 1,000億の挑戦',
+    '自己紹介 — 松村 拓馬',
+    '事業内容 & 会社概要',
+    'Why — なぜやるのか',
+    'Why Local — 地方創生をやりたい理由',
+    'Solution — 解決策',
+    'Market — 市場の追い風',
+    'Financial Plan — ロードマップ',
+    'Social Impact — 女性キャリア支援',
+    'Advice Needed — 4つの課題',
+    'ASK — お力添えのお願い'
+  ];
   let cur = 0;
   const dotsEl = document.getElementById('dots');
   const counterEl = document.getElementById('counter');
@@ -832,6 +1113,7 @@ h1 .d { color:var(--pale); }
     btnNext.disabled = cur===total-1;
     prog.style.width = `${(cur+1)/total*100}%`;
     if (window.innerWidth <= 760) window.scrollTo({ top:0, behavior:'smooth' });
+    if (!document.body.classList.contains('remote-mode')) Sync.send({ t:'state', n:cur });
   }
 
   btnPrev.onclick = () => go(cur-1);
@@ -840,15 +1122,18 @@ h1 .d { color:var(--pale); }
   let touchStartY = 0;
   let skipNextClick = false;
   const isMobile = () => window.innerWidth <= 760;
+  const navLocked = () =>
+    document.body.classList.contains('remote-mode') ||
+    document.getElementById('remote-panel').classList.contains('open');
 
   document.addEventListener('touchstart', e => {
-    if (!isMobile() || !e.touches.length) return;
+    if (!isMobile() || navLocked() || !e.touches.length) return;
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
   }, { passive:true });
 
   document.addEventListener('touchend', e => {
-    if (!isMobile() || !e.changedTouches.length) return;
+    if (!isMobile() || navLocked() || !e.changedTouches.length) return;
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
     if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
@@ -859,15 +1144,346 @@ h1 .d { color:var(--pale); }
   }, { passive:true });
 
   document.addEventListener('click', e => {
-    if (!isMobile() || skipNextClick) return;
-    if (e.target.closest('#nav, button, a')) return;
+    if (!isMobile() || skipNextClick || navLocked()) return;
+    if (e.target.closest('#nav, #remote-panel, #remote-ui, button, a, input')) return;
     if (e.clientY > window.innerHeight - 92) return;
     go(cur + (e.clientX > window.innerWidth / 2 ? 1 : -1));
   });
+
   document.addEventListener('keydown', e => {
+    if (e.target.matches('input, textarea')) return;
+    if (e.key === 'r' || e.key === 'R') { Pairing.toggle(); return; }
+    if (e.key === 'Escape') { Pairing.close(); return; }
+    if (document.body.classList.contains('remote-mode')) {
+      if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); Remote.step(1); }
+      if (e.key==='ArrowLeft' ||e.key==='ArrowUp')                { e.preventDefault(); Remote.step(-1); }
+      return;
+    }
     if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') go(cur+1);
     if (e.key==='ArrowLeft' ||e.key==='ArrowUp') go(cur-1);
   });
+
+  /* ══════════ sync bus ══════════
+     The deck is a static file, so cross-device control rides on a public
+     MQTT-over-WebSocket broker (hand-rolled client — no library, no CDN).
+     Brokers are tried in order; a same-browser BroadcastChannel always runs
+     alongside so two windows on one machine sync even with no network.
+     Nothing connects until remote control is actually requested.          */
+  const Sync = (() => {
+    /* ?relay=wss://host/path puts your own broker first — useful if a venue
+       network blocks the public ones. */
+    const BROKERS = [
+      new URLSearchParams(location.search).get('relay'),
+      'wss://broker.emqx.io:8084/mqtt',
+      'wss://broker.hivemq.com:8884/mqtt',
+      'wss://test.mosquitto.org:8081/mqtt'
+    ].filter(Boolean);
+    const ME = 'jp' + Math.random().toString(36).slice(2, 10);
+    const enc = new TextEncoder(), dec = new TextDecoder();
+
+    let ws = null, bc = null, topic = null, role = null;
+    let bi = 0, tries = 0, acked = false, live = false;
+    let pingTimer = null, retryTimer = null;
+    let onMsg = () => {}, onStatus = () => {};
+
+    /* — MQTT 3.1.1 packet helpers — */
+    const utf = s => { const b = enc.encode(s); return [(b.length >> 8) & 255, b.length & 255, ...b]; };
+    const vlq = n => { const o = []; do { let d = n % 128; n = (n - d) / 128; if (n > 0) d |= 128; o.push(d); } while (n > 0); return o; };
+    const frame = (head, body) => new Uint8Array([head, ...vlq(body.length), ...body]);
+
+    function status(s) { live = (s === 'live' || s === 'peer'); onStatus(s); }
+
+    function connect() {
+      clearTimeout(retryTimer);
+      if (ws) { try { ws.close(); } catch (e) {} }
+      acked = false;
+      status('connecting');
+      try { ws = new WebSocket(BROKERS[bi % BROKERS.length], 'mqtt'); }
+      catch (e) { bi++; retry(); return; }
+      ws.binaryType = 'arraybuffer';
+      let buf = new Uint8Array(0);
+
+      ws.onopen = () => {
+        const cid = ME + Math.random().toString(36).slice(2, 6);
+        ws.send(frame(0x10, [...utf('MQTT'), 4, 0x02, 0x00, 0x3c, ...utf(cid)]));
+      };
+
+      ws.onmessage = ev => {
+        const chunk = new Uint8Array(ev.data);
+        const merged = new Uint8Array(buf.length + chunk.length);
+        merged.set(buf); merged.set(chunk, buf.length);
+        buf = merged;
+        for (;;) {
+          if (buf.length < 2) break;
+          let mult = 1, len = 0, i = 1, complete = false;
+          while (i < buf.length) {
+            const b = buf[i++];
+            len += (b & 127) * mult;
+            mult *= 128;
+            if ((b & 128) === 0) { complete = true; break; }
+            if (mult > 128 * 128 * 128) { complete = true; break; }
+          }
+          if (!complete || buf.length < i + len) break;
+          const first = buf[0];
+          const body = buf.slice(i, i + len);
+          buf = buf.slice(i + len);
+          handle(first, body);
+        }
+      };
+
+      ws.onclose = () => {
+        clearInterval(pingTimer);
+        ws = null;
+        if (!acked) bi++;          // this broker never completed a handshake
+        status('connecting');
+        retry();
+      };
+      ws.onerror = () => {};
+    }
+
+    function handle(first, body) {
+      const type = first >> 4;
+      if (type === 2) {            // CONNACK
+        if (body[1] !== 0) { bi++; retry(); return; }
+        acked = true; tries = 0;
+        ws.send(frame(0x82, [0, 1, ...utf(topic), 0]));   // SUBSCRIBE qos0
+        pingTimer = setInterval(() => { try { ws.send(new Uint8Array([0xc0, 0x00])); } catch (e) {} }, 30000);
+        status('live');
+        send({ t:'hello' });
+        return;
+      }
+      if (type === 3) {            // PUBLISH
+        const tl = (body[0] << 8) | body[1];
+        const qos = (first >> 1) & 3;
+        const off = 2 + tl + (qos > 0 ? 2 : 0);
+        deliver(dec.decode(body.slice(off)));
+      }
+    }
+
+    function retry() {
+      clearTimeout(retryTimer);
+      const wait = Math.min(8000, 500 * Math.pow(2, Math.min(tries++, 4)));
+      retryTimer = setTimeout(connect, wait);
+    }
+
+    function deliver(raw) {
+      let m; try { m = JSON.parse(raw); } catch (e) { return; }
+      if (!m || m.from === ME || m.role === role) return;
+      status('peer');   // a peer message arrived — whichever transport carried it
+      onMsg(m);
+    }
+
+    function send(msg) {
+      if (!topic) return;
+      const payload = JSON.stringify({ ...msg, from:ME, role });
+      if (bc) { try { bc.postMessage(payload); } catch (e) {} }
+      if (ws && acked && ws.readyState === 1) {
+        try { ws.send(frame(0x30, [...utf(topic), ...enc.encode(payload)])); } catch (e) {}
+      }
+    }
+
+    function start(asRole, code, handlers) {
+      role = asRole;
+      topic = 'jokers/pitch/v1/' + code;
+      onMsg = handlers.message || onMsg;
+      onStatus = handlers.status || onStatus;
+      if (bc) { try { bc.close(); } catch (e) {} }
+      if ('BroadcastChannel' in window) {
+        bc = new BroadcastChannel('jokers-pitch-' + code);
+        bc.onmessage = e => deliver(e.data);
+      }
+      bi = 0; tries = 0;
+      connect();
+    }
+
+    return { start, send, get live() { return live; }, get active() { return !!topic; } };
+  })();
+
+  /* ══════════ presenting screen: pairing panel ══════════ */
+  const Pairing = (() => {
+    const panel  = document.getElementById('remote-panel');
+    const codeEl = document.getElementById('rp-code');
+    const urlEl  = document.getElementById('rp-url');
+    const dot    = document.getElementById('rp-dot');
+    const txt    = document.getElementById('rp-status');
+    let code = null;
+
+    function ensureCode() {
+      if (code) return code;
+      try { code = localStorage.getItem('pitch-remote-code'); } catch (e) {}
+      if (!code || !/^\d{6}$/.test(code)) {
+        code = String(Math.floor(100000 + Math.random() * 900000));
+        try { localStorage.setItem('pitch-remote-code', code); } catch (e) {}
+      }
+      return code;
+    }
+
+    function remoteUrl() {
+      return location.origin + location.pathname + '?remote=' + ensureCode();
+    }
+
+    function setStatus(s) {
+      dot.className = 'rp-dot' + (s === 'live' || s === 'peer' ? ' on' : '');
+      txt.textContent = s === 'peer' ? 'リモコン接続済み'
+                      : s === 'live' ? 'リモコンの接続を待っています'
+                      : '中継サーバーに接続中…';
+    }
+
+    function open() {
+      ensureCode();
+      codeEl.textContent = code;
+      urlEl.textContent = remoteUrl();
+      panel.classList.add('open');
+      if (!Sync.active) {
+        Sync.start('deck', code, {
+          status: setStatus,
+          message: m => {
+            if (m.t === 'go' && typeof m.n === 'number') go(m.n);
+            else if (m.t === 'step') go(cur + (m.d > 0 ? 1 : -1));
+            else if (m.t === 'hello') Sync.send({ t:'state', n:cur });
+          }
+        });
+      } else {
+        setStatus(Sync.live ? 'live' : 'connecting');
+      }
+    }
+
+    function close() { panel.classList.remove('open'); }
+    function toggle() { panel.classList.contains('open') ? close() : open(); }
+
+    document.getElementById('rp-close').onclick = close;
+    document.getElementById('btn-remote').onclick = e => {
+      e.stopPropagation();
+      isMobile() ? Remote.openPairing() : toggle();
+    };
+    document.getElementById('rp-copy').onclick = async () => {
+      const btn = document.getElementById('rp-copy');
+      try { await navigator.clipboard.writeText(remoteUrl()); btn.textContent = 'コピーしました'; }
+      catch (e) { btn.textContent = 'URLを手入力してください'; }
+      setTimeout(() => { btn.textContent = 'リモコンURLをコピー'; }, 2000);
+    };
+    panel.addEventListener('click', e => { if (e.target === panel) close(); });
+
+    return { open, close, toggle };
+  })();
+
+  /* ══════════ phone: controller ══════════ */
+  const Remote = (() => {
+    const pair  = document.getElementById('rc-pair');
+    const main  = document.getElementById('rc-main');
+    const input = document.getElementById('rc-input');
+    const err   = document.getElementById('rc-err');
+    const dot   = document.getElementById('rc-dot');
+    const stat  = document.getElementById('rc-status');
+    const numEl = document.getElementById('rc-num');
+    const labEl = document.getElementById('rc-label');
+    const nxtEl = document.getElementById('rc-next');
+    const jump  = document.getElementById('rc-jump');
+    const prevB = document.getElementById('rc-prev');
+    const fwdB  = document.getElementById('rc-fwd');
+    let at = 0, connected = false;
+
+    for (let i = 0; i < total; i++) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = String(i + 1).padStart(2, '0');
+      b.onclick = () => Sync.send({ t:'go', n:i });
+      jump.appendChild(b);
+    }
+
+    function paint(n) {
+      at = Math.max(0, Math.min(total - 1, n));
+      numEl.textContent = `${String(at+1).padStart(2,'0')} / ${total}`;
+      labEl.textContent = LABELS[at] || '—';
+      nxtEl.textContent = at < total - 1 ? '次 — ' + (LABELS[at+1] || '') : '最終スライドです';
+      prevB.disabled = at === 0;
+      fwdB.disabled = at === total - 1;
+      [...jump.children].forEach((b, i) => b.classList.toggle('on', i === at));
+    }
+
+    function setStatus(s) {
+      connected = (s === 'live' || s === 'peer');
+      dot.className = 'rp-dot' + (connected ? ' on' : '');
+      stat.textContent = s === 'peer' ? '発表画面と同期済み'
+                       : s === 'live' ? '接続済み'
+                       : '接続中…';
+    }
+
+    function step(d) { Sync.send({ t:'step', d }); paint(at + d); }
+
+    function connect(code) {
+      document.body.classList.add('remote-mode');
+      pair.classList.remove('on');
+      main.classList.add('on');
+      document.getElementById('rc-code').textContent = 'CODE ' + code;
+      paint(0);
+      Sync.start('remote', code, {
+        status: setStatus,
+        message: m => { if (m.t === 'state' && typeof m.n === 'number') paint(m.n); }
+      });
+    }
+
+    function openPairing() {
+      document.body.classList.add('remote-mode');
+      main.classList.remove('on');
+      pair.classList.add('on');
+      err.textContent = '';
+      setTimeout(() => input.focus(), 120);
+    }
+
+    function exit() {
+      document.body.classList.remove('remote-mode');
+      pair.classList.remove('on');
+      main.classList.remove('on');
+      history.replaceState(null, '', location.pathname);
+    }
+
+    function submit() {
+      const code = input.value.replace(/\D/g, '');
+      if (code.length !== 6) { err.textContent = '6桁のコードを入力してください'; return; }
+      connect(code);
+    }
+
+    document.getElementById('rc-connect').onclick = submit;
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+    document.getElementById('rc-cancel').onclick = exit;
+    document.getElementById('rc-exit').onclick = exit;
+    prevB.onclick = () => step(-1);
+    fwdB.onclick  = () => step(1);
+
+    /* — 3分ピッチ用タイマー — */
+    (() => {
+      const TARGET = 180;
+      const timeEl = document.getElementById('rc-time');
+      const barEl  = document.getElementById('rc-bar');
+      const tog    = document.getElementById('rc-timer-toggle');
+      let base = 0, startedAt = 0, tick = null;
+      const elapsed = () => base + (tick ? Date.now() - startedAt : 0);
+
+      function render() {
+        const s = Math.floor(elapsed() / 1000);
+        timeEl.textContent = `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+        timeEl.className = 'rc-time' + (s >= TARGET ? ' over' : s >= TARGET - 30 ? ' warn' : '');
+        barEl.style.width = Math.min(100, s / TARGET * 100) + '%';
+      }
+      tog.onclick = () => {
+        if (tick) { base = elapsed(); clearInterval(tick); tick = null; tog.textContent = '再開'; }
+        else { startedAt = Date.now(); tick = setInterval(render, 250); tog.textContent = '一時停止'; }
+        render();
+      };
+      document.getElementById('rc-timer-reset').onclick = () => {
+        clearInterval(tick); tick = null; base = 0; tog.textContent = '開始'; render();
+      };
+      render();
+    })();
+
+    return { openPairing, connect, step, exit };
+  })();
+
+  /* ── deep link: ?remote=123456 ── */
+  const deepCode = new URLSearchParams(location.search).get('remote');
+  if (deepCode && /^\d{6}$/.test(deepCode)) Remote.connect(deepCode);
+  else if (deepCode !== null) Remote.openPairing();
 
   go(0);
 </script>
