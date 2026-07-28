@@ -117,14 +117,18 @@ h1 .d { color:var(--pale); }
 /* ── progress / nav ── */
 #progress { position:fixed; top:0; left:0; height:3px; background:var(--red); transition:width .3s; z-index:200; }
 #nav {
-  display:none;
   position:fixed; bottom:24px; left:50%;
   transform:translateX(-50%);
-  display:none; align-items:center; gap:12px;
+  display:flex; align-items:center; gap:12px;
   background:rgba(8,8,8,.95); border:1px solid #2a2a2a;
   border-radius:100px; padding:9px 20px;
   backdrop-filter:blur(16px); z-index:100;
+  opacity:0; pointer-events:none;
+  transition:opacity .22s ease;
 }
+/* desktop: nav fades in on mouse move, like Keynote — keeps the
+   projected slide clean but the controls are no longer keyboard-only */
+body.ui-visible #nav { opacity:1; pointer-events:auto; }
 #nav button { background:none; border:none; color:var(--pale); font-size:20px; cursor:pointer; padding:2px 6px; transition:color .15s; line-height:1; }
 #nav button:hover { color:var(--white); }
 #nav button:disabled { opacity:.2; cursor:default; }
@@ -212,6 +216,8 @@ h1 .d { color:var(--pale); }
   }
   #nav {
     display:flex !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
     bottom:calc(12px + env(safe-area-inset-bottom));
     padding:9px 14px;
     gap:10px;
@@ -291,6 +297,31 @@ h1 .d { color:var(--pale); }
   color:var(--red); margin-bottom:20px;
 }
 .rp-label { font-size:14px; color:var(--muted); letter-spacing:.14em; font-family:monospace; margin-bottom:9px; }
+
+/* role picker — identical on PC and phone */
+.rp-view { display:none; }
+.rp-view.on { display:block; }
+.rp-lead { font-size:19px; font-weight:800; color:var(--white); line-height:1.5; margin-bottom:18px; }
+.rp-lead span { display:block; font-size:14px; font-weight:500; color:var(--muted); margin-top:6px; }
+.rp-role {
+  display:block; width:100%; text-align:left; font:inherit; cursor:pointer;
+  background:#131313; border:1px solid #2c2c2c; border-left:4px solid #3a3a3a;
+  border-radius:6px; padding:16px 18px; margin-bottom:10px;
+  transition:border-color .15s, background .15s;
+}
+.rp-role:hover { background:#181818; border-color:#454545; border-left-color:var(--red); }
+.rp-role strong { display:block; font-size:18px; font-weight:900; color:var(--white); margin-bottom:5px; }
+.rp-role em { display:block; font-style:normal; font-size:14px; color:var(--pale); line-height:1.55; }
+.rp-role .rp-tag {
+  display:inline-block; font-family:monospace; font-size:11px; font-weight:800;
+  letter-spacing:.12em; color:var(--red); border:1px solid var(--red);
+  border-radius:3px; padding:1px 6px; margin-left:8px; vertical-align:2px;
+}
+.rp-back {
+  font:inherit; font-size:14px; font-weight:600; color:var(--muted);
+  background:none; border:none; cursor:pointer; padding:0; margin-bottom:16px;
+}
+.rp-back:hover { color:var(--pale); }
 .rp-code {
   font-family:'SF Mono',monospace;
   font-size:clamp(38px,8vw,58px);
@@ -443,6 +474,32 @@ body.remote-mode #remote-ui { display:block; }
   -webkit-tap-highlight-color:transparent; touch-action:manipulation;
 }
 .rc-jump button.on { background:var(--red); border-color:var(--red); color:#fff; }
+.rc-jump button:hover { color:var(--pale); }
+.rc-jump button.on:hover { color:#fff; }
+
+/* pairing panel on a phone acting as the presenting screen */
+@media (max-width: 760px) {
+  .rp-box { padding:24px 20px; }
+  .rp-eyebrow { font-size:12px; letter-spacing:.13em; margin-bottom:16px; }
+  .rp-code { letter-spacing:.1em; }
+  .rp-lead { font-size:17px; }
+  .rp-role { padding:14px 15px; }
+  .rp-role strong { font-size:17px; }
+  .rp-role em { font-size:13px; }
+  .rp-step { font-size:15px; }
+  .rp-actions button { flex:1 1 100%; }
+}
+
+/* controller on a desktop window — same UI, centred and not stretched */
+@media (min-width: 761px) {
+  .rc-wrap { max-width:620px; justify-content:center; padding:40px 24px; }
+  #rc-pair, #rc-main { flex:0 1 auto; }
+  .rc-pads { flex:0 0 auto; min-height:0; }
+  .rc-pad { padding:34px 10px; }
+  .rc-time { font-size:56px; }
+  #rc-input { font-size:38px; }
+  .rc-ghost { margin-top:24px; }
+}
 </style>
 </head>
 <body>
@@ -1004,21 +1061,43 @@ body.remote-mode #remote-ui { display:block; }
 <!-- ══ Remote: pairing panel (presenting screen) ══ -->
 <div id="remote-panel">
   <div class="rp-box">
-    <div class="rp-eyebrow">Remote Control — スマホで操作</div>
-    <div class="rp-label">ペアリングコード</div>
-    <div class="rp-code" id="rp-code">······</div>
-    <div class="rp-status"><span class="rp-dot" id="rp-dot"></span><span id="rp-status">待機中</span></div>
-    <div class="rp-steps">
-      <div class="rp-step"><span class="rp-n">1</span><span>スマホで同じURLを開く</span></div>
-      <div class="rp-step"><span class="rp-n">2</span><span>画面下の <strong>REMOTE</strong> をタップ</span></div>
-      <div class="rp-step"><span class="rp-n">3</span><span>上のコードを入力して接続</span></div>
+    <div class="rp-eyebrow">Remote Control — 2画面で操作</div>
+
+    <!-- ── role picker ── -->
+    <div class="rp-view on" id="rp-choose">
+      <div class="rp-lead">
+        この端末を、どちらとして使いますか？
+        <span>PC・スマホどちらでも、両方の役割を選べます。</span>
+      </div>
+      <button type="button" class="rp-role" id="rp-role-deck">
+        <strong>発表画面にする<span class="rp-tag">DISPLAY</span></strong>
+        <em>スライドをこの画面に映し、別の端末から操作してもらう。<br>プロジェクターや外部ディスプレイに繋ぐ側です。</em>
+      </button>
+      <button type="button" class="rp-role" id="rp-role-remote">
+        <strong>リモコンにする<span class="rp-tag">REMOTE</span></strong>
+        <em>別の端末に映しているスライドを、この画面から操作する。<br>手元に持つ側です。3分タイマーも使えます。</em>
+      </button>
+      <div class="rp-hint">キーボード <strong>R</strong> で開閉 / <strong>←→ Space</strong> でスライド送り<br>マウスを動かすと下部のナビが表示されます</div>
     </div>
-    <div class="rp-url" id="rp-url"></div>
-    <div class="rp-actions">
-      <button type="button" id="rp-copy">リモコンURLをコピー</button>
-      <button type="button" id="rp-close">閉じる</button>
+
+    <!-- ── presenting screen: pairing code ── -->
+    <div class="rp-view" id="rp-present">
+      <button type="button" class="rp-back" id="rp-to-choose">‹ 役割を選び直す</button>
+      <div class="rp-label">ペアリングコード</div>
+      <div class="rp-code" id="rp-code">······</div>
+      <div class="rp-status"><span class="rp-dot" id="rp-dot"></span><span id="rp-status">待機中</span></div>
+      <div class="rp-steps">
+        <div class="rp-step"><span class="rp-n">1</span><span>手元の端末（スマホ / PC）で同じURLを開く</span></div>
+        <div class="rp-step"><span class="rp-n">2</span><span><strong>REMOTE</strong> を押して <strong>リモコンにする</strong> を選ぶ</span></div>
+        <div class="rp-step"><span class="rp-n">3</span><span>上のコードを入力して接続</span></div>
+      </div>
+      <div class="rp-url" id="rp-url"></div>
+      <div class="rp-actions">
+        <button type="button" id="rp-copy">リモコンURLをコピー</button>
+        <button type="button" id="rp-close">閉じる</button>
+      </div>
+      <div class="rp-hint">この画面は発表画面のままです。<strong>←→ Space</strong> でも操作できます。</div>
     </div>
-    <div class="rp-hint">キーボード <strong>R</strong> で開閉 / <strong>←→ Space</strong> でスライド操作</div>
   </div>
 </div>
 
@@ -1032,7 +1111,7 @@ body.remote-mode #remote-ui { display:block; }
       <input id="rc-input" type="text" inputmode="numeric" autocomplete="off" maxlength="6" placeholder="000000">
       <div class="rc-err" id="rc-err"></div>
       <button type="button" class="rc-primary" id="rc-connect">接続する</button>
-      <div class="rc-note">発表用のPCでこのスライドを開き、<strong>R</strong> キーを押すとコードが表示されます。</div>
+      <div class="rc-note">発表画面側の端末で <strong>REMOTE</strong> を押して<strong>発表画面にする</strong>を選ぶと、コードが表示されます。（PCは <strong>R</strong> キーでも開きます）</div>
       <button type="button" class="rc-ghost" id="rc-cancel">スライド表示に戻る</button>
     </div>
 
@@ -1121,19 +1200,20 @@ body.remote-mode #remote-ui { display:block; }
   let touchStartX = 0;
   let touchStartY = 0;
   let skipNextClick = false;
-  const isMobile = () => window.innerWidth <= 760;
   const navLocked = () =>
     document.body.classList.contains('remote-mode') ||
     document.getElementById('remote-panel').classList.contains('open');
 
+  /* Swipe and click-to-advance are gated on the event, not the screen width,
+     so a touch laptop swipes and a phone with a keyboard still uses arrows. */
   document.addEventListener('touchstart', e => {
-    if (!isMobile() || navLocked() || !e.touches.length) return;
+    if (navLocked() || !e.touches.length) return;
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
   }, { passive:true });
 
   document.addEventListener('touchend', e => {
-    if (!isMobile() || navLocked() || !e.changedTouches.length) return;
+    if (navLocked() || !e.changedTouches.length) return;
     const dx = e.changedTouches[0].clientX - touchStartX;
     const dy = e.changedTouches[0].clientY - touchStartY;
     if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
@@ -1144,11 +1224,22 @@ body.remote-mode #remote-ui { display:block; }
   }, { passive:true });
 
   document.addEventListener('click', e => {
-    if (!isMobile() || skipNextClick || navLocked()) return;
+    if (skipNextClick || navLocked()) return;
     if (e.target.closest('#nav, #remote-panel, #remote-ui, button, a, input')) return;
     if (e.clientY > window.innerHeight - 92) return;
+    if (!window.getSelection().isCollapsed) return;   // don't advance on text selection
     go(cur + (e.clientX > window.innerWidth / 2 ? 1 : -1));
   });
+
+  /* auto-hiding nav on pointer devices (always visible on touch layouts) */
+  let uiTimer = null;
+  function revealUI() {
+    document.body.classList.add('ui-visible');
+    clearTimeout(uiTimer);
+    uiTimer = setTimeout(() => document.body.classList.remove('ui-visible'), 2600);
+  }
+  window.addEventListener('mousemove', revealUI, { passive:true });
+  window.addEventListener('mousedown', revealUI, { passive:true });
 
   document.addEventListener('keydown', e => {
     if (e.target.matches('input, textarea')) return;
@@ -1329,11 +1420,16 @@ body.remote-mode #remote-ui { display:block; }
                       : '中継サーバーに接続中…';
     }
 
-    function open() {
+    const choose  = document.getElementById('rp-choose');
+    const present = document.getElementById('rp-present');
+    const view = v => { choose.classList.toggle('on', v === 'choose'); present.classList.toggle('on', v === 'present'); };
+
+    /* make this screen the presenting display: publish state, accept commands */
+    function startPresenting() {
       ensureCode();
       codeEl.textContent = code;
       urlEl.textContent = remoteUrl();
-      panel.classList.add('open');
+      view('present');
       if (!Sync.active) {
         Sync.start('deck', code, {
           status: setStatus,
@@ -1348,14 +1444,20 @@ body.remote-mode #remote-ui { display:block; }
       }
     }
 
+    /* already presenting? go straight to the code, else ask which role */
+    function open() {
+      panel.classList.add('open');
+      Sync.active ? startPresenting() : view('choose');
+    }
+
     function close() { panel.classList.remove('open'); }
     function toggle() { panel.classList.contains('open') ? close() : open(); }
 
     document.getElementById('rp-close').onclick = close;
-    document.getElementById('btn-remote').onclick = e => {
-      e.stopPropagation();
-      isMobile() ? Remote.openPairing() : toggle();
-    };
+    document.getElementById('rp-to-choose').onclick = () => view('choose');
+    document.getElementById('rp-role-deck').onclick = startPresenting;
+    document.getElementById('rp-role-remote').onclick = () => { close(); Remote.openPairing(); };
+    document.getElementById('btn-remote').onclick = e => { e.stopPropagation(); toggle(); };
     document.getElementById('rp-copy').onclick = async () => {
       const btn = document.getElementById('rp-copy');
       try { await navigator.clipboard.writeText(remoteUrl()); btn.textContent = 'コピーしました'; }
@@ -1486,6 +1588,7 @@ body.remote-mode #remote-ui { display:block; }
   else if (deepCode !== null) Remote.openPairing();
 
   go(0);
+  revealUI();   // show the nav once on load so the controls are discoverable
 </script>
 </body>
 </html>
